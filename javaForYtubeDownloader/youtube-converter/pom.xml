@@ -28,7 +28,7 @@
 	</scm>
 	<properties>
 		<!-- nécessaire pour faire tourner java 21 -->
-		<java.version>22</java.version>
+		<java.version>23</java.version>
 	</properties>
 	<dependencies>
 

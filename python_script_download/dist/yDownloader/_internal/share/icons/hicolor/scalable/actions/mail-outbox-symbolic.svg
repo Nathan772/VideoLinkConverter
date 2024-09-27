@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="svg7384" width="16" height="16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <title id="title9167">Gnome Symbolic Icon Theme</title>
+ <metadata id="metadata90">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>Gnome Symbolic Icon Theme</dc:title>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g id="g11511" transform="translate(493.21 -3647.9)">
+  <title id="title1701">mail-inbox-symbolic</title>
+  <path id="path11507" d="m-486.21 3657.9v-5.5625l-1.2812 1.2812c-0.18816 0.1882-0.45345 0.2813-0.71875 0.2813h-1v-1c1e-5 -0.2653 0.0931-0.5306 0.28125-0.7188l3-3 0.28125-0.2812h0.875l0.28125 0.2812 3 3c0.18819 0.1882 0.28124 0.4535 0.28125 0.7188v1h-1c-0.2653 0-0.53059-0.093-0.71875-0.2813l-1.2812-1.2812v5.5625z" style="color:#000000;fill:#bebebe;text-decoration-line:none;text-indent:0;text-transform:none"/>
+  <path id="path11509" transform="translate(678.79 1775.9)" d="m-1169 1881v2 0.502 2.498a0.99999 0.99999 0 0 0 0.9727 0.998h8.0273a0.99999 0.99999 0 0 0 1-1v-3-2h-2v2h-6v-2zm3.4941 3h3c0.277 0 0.5 0.223 0.5 0.5s-0.223 0.5-0.5 0.5h-3c-0.277 0-0.5-0.223-0.5-0.5s0.223-0.5 0.5-0.5z" style="color:#000000;fill-rule:evenodd;fill:#bebebe"/>
+ </g>
+</svg>

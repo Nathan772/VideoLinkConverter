@@ -1,0 +1,3 @@
+find ~ -path \*site-packages/pytube -print -quit
+
+r'\([a-z]\s*=\s*([a-zA-Z0-9$]+)(\[\d+\])\([a-z]\)',

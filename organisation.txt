@@ -1,0 +1,66 @@
+Le site qui sert de référence :
+
+- https://www.baeldung.com/spring-boot-angular-web 
+
+--> donne les instructions pour installer spring.
+
+Pour installer spring : 
+
+- télécharger les jar associés aux versions de spring que vous souhaitez utiliser.
+- les jars sont sur le site de maven : https://mvnrepository.com/  > leurs références sont directement accessibles
+- ajouter les jars au build de votre projet pour que cela soit aussi reconnu dans le fichier pom.xml (si vous ne le faites pas, ils ne seront pas reconnus et
+apparaitront en rouge) : https://www.geeksforgeeks.org/how-to-add-external-jar-file-to-an-intellij-idea-project/
+
+-si l'ajout des jars est bien faite, il n'est pas nécessaire de lancer un quelconque builder ou grader de maven, on constate que les parties qui apparaissaient en rouge 
+dans le fichier XML, reprennent une couleur dites "normale" (noir) et le fait d'écrire les annotations ne pose plus problèmes dans les fichiers
+
+
+Pour angular :
+
+-npm install -g @angular/cli@1.7.4
+
+lancer cette commande dans le terminal, dans le dossier du projet, pour générer automatiquement les différentes pages webs angular.
+
+---> résoudre l'erreur :  "npm error code EACCES while doing npm install":
+
+    -https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally 
+
+    --> notamment nvm install node
+
+    --> résoudre l'erreur : "npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. ":
+
+    - https://github.com/jestjs/jest/issues/15087
+
+    ---> commande : npm install jest@next
+
+    - https://github.com/sveltejs/kit/issues/12258
+
+    ---> commande : npx svelte-migrate@latest svelte-4
+
+    résoudre l'erreur : 
+
+    "npm ERR! gyp info it worked if it ends with ok
+    npm ERR! gyp verb cli [
+    npm ERR! gyp verb cli   '/home/nathanb/.nvm/versions/node/v16.20.2/bin/node',"
+
+    ---> "npm install -g @angular/cli" plutôt que "npm install -g @angular/cli@1.7.4"
+
+
+Lancer la commande : "ng new angularclient" dans un dossier que vous aurez prévu dans votre projet pour stocker les fichiers angular 
+(nommé comme vous le souhaitez) afin de générer les fichiers associés à angular automatiquement.
+
+-les fichiers dans le dossier angular.angularclient, ont tous été autogénérés.
+Seul une partie des fichiers contenus dans "src" ne sont pas autogénérés.
+
+La commande : "ng generate class user" se lance dans le dossier autogénérés angularclient.
+
+dans le dossier "angular", le dossier "service" a été créé par moi-même.
+
+Par la suite j'ai lancé la commande "ng generate service user-service", pour créer les fichiers associés au service de l'utilisateur.
+
+
+J'ai aussi dû créer un répertoire : "user_list" à la main et lancer depuis ce répertoire la commande :
+
+"ng generate component user-list"
+
+Pour créer un composant chargé d'afficher la list de user dans le répertoire user_list.

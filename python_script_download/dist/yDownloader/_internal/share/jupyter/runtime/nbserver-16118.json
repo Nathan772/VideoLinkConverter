@@ -1,0 +1,11 @@
+{
+  "base_url": "/",
+  "hostname": "localhost",
+  "notebook_dir": "/home/nathanb/Bureau/Bureau/Les-Cours/M1-info/stage/Stage_pratique/M1-INFO/Platon/a_resoudre/cercle_trigo",
+  "password": false,
+  "pid": 16118,
+  "port": 8888,
+  "secure": false,
+  "token": "39453783f407892d3cfa1928da9d7c15d175eeb61ca6fe79",
+  "url": "http://localhost:8888/"
+}

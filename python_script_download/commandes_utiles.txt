@@ -1,3 +1,13 @@
 find ~ -path \*site-packages/pytube -print -quit
 
 r'\([a-z]\s*=\s*([a-zA-Z0-9$]+)(\[\d+\])\([a-z]\)',
+
+find ~ -path \*@angular-devkit
+
+ -print -quit
+
+
+
+find ~ -path \*@angular/cli/bin/ng
+
+

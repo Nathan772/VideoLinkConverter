@@ -5,7 +5,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.3</version>
+		<version>3.3.4</version>
+
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>nate.company</groupId>
@@ -28,7 +29,7 @@
 	</scm>
 	<properties>
 		<!-- nécessaire pour faire tourner java 21 -->
-		<java.version>22</java.version>
+		<java.version>23</java.version>
 	</properties>
 	<dependencies>
 
@@ -69,6 +70,14 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-parent</artifactId>
+			<version>3.3.4</version>
+			<type>pom</type>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
 		<dependency>
 			<groupId>org.apache.maven.plugins</groupId>
@@ -84,7 +93,7 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>2.3.232</version>
-			<scope>test</scope>
+			<scope>runtime</scope>
 		</dependency>
 
 

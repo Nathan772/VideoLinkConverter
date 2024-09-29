@@ -11,6 +11,17 @@ Pour installer spring :
 - ajouter les jars au build de votre projet pour que cela soit aussi reconnu dans le fichier pom.xml (si vous ne le faites pas, ils ne seront pas reconnus et
 apparaitront en rouge) : https://www.geeksforgeeks.org/how-to-add-external-jar-file-to-an-intellij-idea-project/
 
+
+
+-Sur le fichier pom.xml :
+
+1) faire clique droite "add as maven project" (je ne me souviens plus du nom précis)
+
+--> https://stackoverflow.com/questions/19245737/how-to-execute-maven-project-through-pom-xml-file
+
+2) appuyez sur le marteau du build
+
+
 -si l'ajout des jars est bien faite, il n'est pas nécessaire de lancer un quelconque builder ou grader de maven, on constate que les parties qui apparaissaient en rouge 
 dans le fichier XML, reprennent une couleur dites "normale" (noir) et le fait d'écrire les annotations ne pose plus problèmes dans les fichiers
 
@@ -37,6 +48,16 @@ lancer cette commande dans le terminal, dans le dossier du projet, pour génére
 
     ---> commande : npx svelte-migrate@latest svelte-4
 
+        --> si la commande Sass est demandée dans les msgs d'erreur :
+
+            -installer sass en utilisant : 
+
+                    --> "npm install -g sass"
+
+                        --> résoudre le pb: 
+            
+                            --> https://stackoverflow.com/questions/52979927/npm-warn-checkpermissions-missing-write-access-to-usr-local-lib-node-modules
+
     résoudre l'erreur : 
 
     "npm ERR! gyp info it worked if it ends with ok
@@ -58,9 +79,50 @@ dans le dossier "angular", le dossier "service" a été créé par moi-même.
 
 Par la suite j'ai lancé la commande "ng generate service user-service", pour créer les fichiers associés au service de l'utilisateur.
 
+---> résoudre : 
+
+    -An unhandled exception occurred: Cannot find module '@angular-devkit/schematics/tools'
+    -https://stackoverflow.com/questions/53940350/error-cannot-find-module-angular-devkit-schematics-and-cannot-find-module
 
 J'ai aussi dû créer un répertoire : "user_list" à la main et lancer depuis ce répertoire la commande :
 
 "ng generate component user-list"
 
 Pour créer un composant chargé d'afficher la list de user dans le répertoire user_list.
+
+Si vous tombez sur le msg suivant :
+
+"La commande « ng » n'a pas été trouvée, mais peut être installée avec :
+
+sudo apt install ng-common"
+
+ne le faites pas, cette installation cause un bug. Il doit y avoir une autre cause de votre 
+erreur, lancez un autre terminal et relancer votre commande par exemple.
+
+A la place il faut tout réinstaller :
+
+-" sudo apt-get install npm" 
+- "sudo npm install -g n"
+- "sudo n latest"
+- "sudo npm install -g @angular/cli"
+
+Pour résoudre :
+
+- ~~ "An unhandled exception occurred: Cannot find module cannot find rxjs"
+
+-->  npm i rxjs@7.5.2
+
+- An unhandled exception occurred: Cannot find module '@angular-devkit/architect/node'
+
+-->  passer par yarn pour instaler devkit/archtiect/node :
+    et faire les ajouts dans le dossier : "/usr/local/lib/node_modules" --
+    (https://www.hostinger.fr/tutoriels/comment-installer-yarn)
+    -sudo npm install --global yarn
+    -yarn add @angular-devkit/architect
+    https://listr2.kilic.dev/listr/installation.html
+    -yarn add listr2
+    ou
+    -npm i listr2
+
+
+

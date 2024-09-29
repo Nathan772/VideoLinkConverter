@@ -98,3 +98,31 @@ sudo apt install ng-common"
 
 ne le faites pas, cette installation cause un bug. Il doit y avoir une autre cause de votre 
 erreur, lancez un autre terminal et relancer votre commande par exemple.
+
+A la place il faut tout réinstaller :
+
+-" sudo apt-get install npm" 
+- "sudo npm install -g n"
+- "sudo n latest"
+- "sudo npm install -g @angular/cli"
+
+Pour résoudre :
+
+- ~~ "An unhandled exception occurred: Cannot find module cannot find rxjs"
+
+-->  npm i rxjs@7.5.2
+
+- An unhandled exception occurred: Cannot find module '@angular-devkit/architect/node'
+
+-->  passer par yarn pour instaler devkit/archtiect/node :
+    et faire les ajouts dans le dossier : "/usr/local/lib/node_modules" --
+    (https://www.hostinger.fr/tutoriels/comment-installer-yarn)
+    -sudo npm install --global yarn
+    -yarn add @angular-devkit/architect
+    https://listr2.kilic.dev/listr/installation.html
+    -yarn add listr2
+    ou
+    -npm i listr2
+
+
+

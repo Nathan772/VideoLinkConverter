@@ -12,3 +12,25 @@ Résoudres les pbs du type :
 dans l'arborescence.
 Essayer d'ajouter le path ou de mettre les éléments que ccherche le repository dans le même package
 ou sous package, tout en rendant l'application (Application.java) parent de ces package
+
+résoudre :
+"Failed to execute goal org.springframework.boot:spring-boot-maven-plugin"
+
+
+ https://stackoverflow.com/questions/45400701/failed-to-execute-goal-org-springframework-bootspring-boot-maven-plugin1-5-6-r
+			
+    	ajout lié à cette page (début) :
+				 permet de résoudre : 
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>none</phase>
+					</execution>
+				</executions>
+
+
+		
+
+curl --location 'http://localhost:8080/users' \ --header 'Content-Type: application/json' \ --data-raw '{"name": "John Doe", "email": "john.doe@baeldgung.com"}'

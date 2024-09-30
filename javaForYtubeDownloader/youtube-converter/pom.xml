@@ -107,6 +107,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+
+				<!-- https://stackoverflow.com/questions/45400701/failed-to-execute-goal-org-springframework-bootspring-boot-maven-plugin1-5-6-r
+				ajout lié à cette page (début) :
+				 permet de résoudre : Failed to execute goal org.springframework.boot:spring-boot-maven-plugin -->
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>none</phase>
+					</execution>
+				</executions>
+<!-- ajout lié à cette page (fin) -->
 			</plugin>
 
 			<!--nécessaire en plus du jar et de la dépendance -->

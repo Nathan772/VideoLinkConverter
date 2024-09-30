@@ -125,4 +125,10 @@ Pour résoudre :
     -npm i listr2
 
 
+Pour les installations de angualar :
+
+npm/yarn, les faire dans le dossier source de angular nommé ici, "angular".
+Si une install npm ne marche pas, essayez de la faire avec yarn (généralement tout marche avec yarn). Si le package 
+n'est pas trouvable directement en lien "yarn", vous pouvez copier texte npm du package et juste remplacer le début par : 
+"yarn add [nom du package utilisé pour npm]" et généralement ça marche tout aussi bien
 

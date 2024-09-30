@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { UserService } from './service/user.service';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UserService } from './service/user.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

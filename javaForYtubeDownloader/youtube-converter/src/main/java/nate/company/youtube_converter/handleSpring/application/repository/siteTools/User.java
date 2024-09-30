@@ -1,7 +1,6 @@
-package nate.company.youtube_converter.siteTools;
+package nate.company.youtube_converter.handleSpring.application.repository.siteTools;
 
 import jakarta.persistence.*;
-import org.springframework.context.annotation.Bean;
 
 import org.springframework.stereotype.Component;
 

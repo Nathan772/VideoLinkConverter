@@ -1,8 +1,7 @@
-package nate.company.youtube_converter.controller;
+package nate.company.youtube_converter.handleSpring.application.controller;
 
-import nate.company.youtube_converter.siteTools.User;
-import nate.company.youtube_converter.siteTools.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import nate.company.youtube_converter.handleSpring.application.repository.siteTools.User;
+import nate.company.youtube_converter.handleSpring.application.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +9,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 /* cette
 partie a été écrite manuellement il faut tjrs se référer à la page

@@ -30,8 +30,11 @@
 	<properties>
 		<!-- nécessaire pour faire tourner java 21 -->
 		<java.version>23</java.version>
+		<start-class>src.main.java.nate.company.youtube_converter.handleSpring.application.Application</start-class>
 	</properties>
 	<dependencies>
+
+
 
 
 
@@ -116,5 +119,24 @@
 
 		</plugins>
 	</build>
+
+	<!--
+	<profiles>
+
+
+		<profile>
+			<id>mainPrincipal</id>
+			<properties>
+				<spring.boot.mainclass>nate.company.youtube_converter.application.Application</spring.boot.mainclass>
+			</properties>
+		</profile>
+		<profile>
+			<id>YconverterMain</id>
+			<properties>
+				<spring.boot.mainclass>nate.company.youtube_converter.YoutubeConverterApplication</spring.boot.mainclass>
+			</properties>
+		</profile>
+
+	</profiles>-->
 
 </project>

@@ -1,17 +1,37 @@
 {
   "dependencies": {
+    "babel-preset-react-app": "^10.0.1",
     "bootstrap": "5.1",
     "bulma": "^1.0.2",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.11.1",
+    "eslint-config-react-app": "^7.0.1",
     "jest": "^30.0.0-alpha.6",
     "node-sass": "^9.0.0",
+    "postcss": "^8.4.47",
+    "postcss-loader": "^8.1.1",
+    "postcss-sass-loader": "^1.1.0",
     "react-cookie": "^4.1.1",
+    "react-dev-utils": "^12.0.1",
+    "react-dev-utils-canary": "^4.0.2-206f9e8.0",
+    "react-refresh": "^0.14.2",
     "react-router-dom": "^5.3.0",
     "reactstrap": "^8.10.0",
-    "sass": "^1.79.3"
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.79.3",
+    "sass-loader": "^16.0.2",
+    "style-loader": "^4.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@svgr/webpack": "^8.1.0",
+    "babel-loader": "^9.2.1",
+    "file-loader": "^6.2.0",
+    "source-map-loader": "^5.0.0",
     "svelte-check": "^4.0.2",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.2",
+    "webpack": "^5.95.0"
   },
   "overrides": {
     "eslint": {

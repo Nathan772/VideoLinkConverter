@@ -31,7 +31,6 @@ required a bean of type 'nate.company.youtube_converter.handleSpring.application
 //sous répertoire les éléments recherchés (ici UserRepository)
 @ComponentScan({"nate/company/youtube_converter"})
 public class Application {
-git
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

@@ -20,6 +20,7 @@ résoudre :
  https://stackoverflow.com/questions/45400701/failed-to-execute-goal-org-springframework-bootspring-boot-maven-plugin1-5-6-r
 			
     	ajout lié à cette page (début) :
+		
 				 permet de résoudre : 
 				<configuration>
 					<skip>true</skip>
@@ -34,3 +35,7 @@ résoudre :
 		
 
 curl --location 'http://localhost:8080/users' \ --header 'Content-Type: application/json' \ --data-raw '{"name": "John Doe", "email": "john.doe@baeldgung.com"}'
+
+Pour toutes les commandes npm install ou yarn install, il faut les lancer à la racine de la partie react pour qu'elles fonctionnent : 
+dans mon cas, c'est dans le dossier "reactjs".
+Par contre, pour lancer la commande qui lance projet, c'est dans le dossier où est situé le fichier "pom.xml".

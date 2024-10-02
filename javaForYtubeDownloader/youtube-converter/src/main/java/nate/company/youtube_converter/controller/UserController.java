@@ -14,7 +14,16 @@ partie a été écrite manuellement il faut tjrs se référer à la page
 https://www.baeldung.com/spring-boot-angular-web
  */
 @RestController
-@CrossOrigin(origins="https://localhost:4200")
+/*
+C'est le front qui est en 4200, mais cela permet justement de connecter le back au front
+ */
+//@CrossOrigin(origins="https://localhost:4200", maxAge =3600)
+/*
+permet de résoudre le problème de
+"No Access-control-allow-origin"
+cors policy error
+ */
+@CrossOrigin("*")
 public class UserController {
 
     /*
@@ -39,6 +48,7 @@ public class UserController {
      * this method retrieves all the users from the database
      * @return
      */
+    //@RequestMapping("/users")
     @GetMapping("/users")
     public List<User> getUsers(){
         return (List<User>) userRepository.findAll();

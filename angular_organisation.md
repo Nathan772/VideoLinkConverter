@@ -125,7 +125,7 @@ Quand il y a des problèmes d'affichage, penser à regarder les logs pour plus d
 Pour ce qui est du problème où angular ne reconnait pas une autre page que index,
 verifier que le fichier main.ts est de la forme :
 
-```
+```typescript
 
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
@@ -147,3 +147,9 @@ angular/angularclient : et si ça produit une erreur avec architect/node,
 alors supprimer manuellement en allant directement dans le fichier 
 associé, les lignes qui contiennent architect/Node, il peut causer des 
 bugs à l'installation.
+
+```bash
+
+yarn add rxjs
+
+```

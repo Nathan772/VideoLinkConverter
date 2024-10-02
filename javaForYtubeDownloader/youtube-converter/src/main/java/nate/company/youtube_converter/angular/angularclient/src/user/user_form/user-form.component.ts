@@ -42,8 +42,7 @@ export class UserFormComponent implements OnInit {
 
   onSubmit() {
     //le goto , redirige vers le /users path
-    this.userService.save(this.user);
-    //.subscribe(result => this.gotoUserList());
+    this.userService.save(this.user).subscribe(result => this.gotoUserList());
   }
 
   gotoUserList() {

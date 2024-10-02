@@ -1,5 +1,5 @@
 /*import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -15,9 +15,10 @@ deprecated
 */
 
 import { Component } from '@angular/core';
-/*import { Routes, RouterModule } from '@angular/router';
-import { AppRoutingModule } from './app-routing.module'
-*/
+import { Routes, RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { RouterOutlet } from '@angular/router';
+import {UserListComponent} from '../user/user_list/user-list.component'
 
 @Component({
   selector: 'app-root',
@@ -26,9 +27,11 @@ import { AppRoutingModule } from './app-routing.module'
 })
 export class AppComponent {
 
+
   title: string;
 
+
   constructor() {
-    this.title = 'Spring Boot - Angular Application';
+    this.title = 'Spring Boot feat. Angular Application';
   }
 }

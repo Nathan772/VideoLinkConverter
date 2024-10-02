@@ -10,6 +10,8 @@ export class UserService {
   private usersUrl: string;
 
   constructor(private http: HttpClient) {
+    //usersUrl va permettre de faire le lien avec le backend
+    //l'@ 8080 est une @ du backend
     this.usersUrl = 'http://localhost:8080/users';
   }
 

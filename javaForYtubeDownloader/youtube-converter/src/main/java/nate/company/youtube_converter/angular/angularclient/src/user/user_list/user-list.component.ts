@@ -47,14 +47,16 @@ export class UserListComponent implements OnInit {
   constructor(service: UserService) {
     this.users = [];
     this.userService = service;
-    this.userService.findAll().subscribe(data => {
-          this.users = data;
-        });
+
   }
 
   ngOnInit() {
     //stocke les users récupérés
     // dans this.users
+
+    this.userService.findAll().subscribe(data => {
+              this.users = data;
+            });
 
   }
 }

@@ -15,20 +15,19 @@ import { UserService } from './user/user_service/user-service.service';
 import {RouterModule} from '@angular/router';
 
 @NgModule({
+   declarations: [
+      AppComponent,
+      UserListComponent,
+      UserFormComponent,
+    ],
   imports: [
       BrowserModule,
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
+      RouterModule
     ],
-
-  declarations: [
-    AppComponent,
-    UserListComponent,
-    UserFormComponent,
-  ],
-
   providers: [UserService],
-  bootstrap: [AppComponent]
+  bootstrap:[AppComponent],
 })
 export class AppModule { }

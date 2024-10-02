@@ -1,0 +1,14 @@
+retourner à un ancien commit : 
+
+git checkout  87acccafff1a3ac12dbd908d652dfb29be80f84b
+
+Résoudres les pbs du type :
+
+"not a managed type"
+
+"parameter 0 of constructor..."
+
+--> lié à la hiérarchie des éléments, difficulté pour la machine de trouver les éléments
+dans l'arborescence.
+Essayer d'ajouter le path ou de mettre les éléments que ccherche le repository dans le même package
+ou sous package, tout en rendant l'application (Application.java) parent de ces package

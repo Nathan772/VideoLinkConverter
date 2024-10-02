@@ -20,9 +20,9 @@ import os
 #créer un fichier à inclure qui gère entièrement la transformation d'un fichier mp3 en fichier mp4 et ensuite appeler
 # une méthode de ce fichier dans downloadMP3
 # download MP3 appel downloadMP4 puis appel ce fichier à inclure sur le fichier puis supprime le fichier au format mp4
-def DownloadMP3(link, newTitleOn:bool=False, Mp3_outputPath:str="MP3_output",Mp4_outputPath:str="MP4_output"):
+def downloadMP3(link, newTitleOn:bool=False, Mp3_outputPath:str="MP3_output",Mp4_outputPath:str="MP4_output"):
     try:
-        oldTitle = DownloadMP4(link, newTitleOn)
+        oldTitle = downloadMP4(link, newTitleOn)
 
         #recupère la vidéo MP4 (BEGINNING)
 
@@ -78,13 +78,13 @@ def findFileWithPath(pathBegin:str):
     strForSubProcess = "find ~ -path \\*"+ pathBegin +" -print -quit"
     #subprocess.call("find ~ -path \*YtubeDonwloader/python_script_download/MP3_output -print -quit", shell=True)
     subprocess.call(strForSubProcess, shell=True)
-    #il faut trouver un moyen de récupérer la sortie standard dans une variable... pour récupérer le path qui est donné
+    #récupère la chaine renvoyée à la sortie standard en vraie chaine
     pathSearchedInBytes = subprocess.check_output(strForSubProcess, shell=True)
-    actualStr = pathSearchedInBytes.decode('ASCII').rstrip()
+    actualStr = pathSearchedInBytes.decode('utf-8').rstrip()
     return actualStr
 
 
-def DownloadMP4(link:str, newTitleOn:bool=False, pathForMp4output:str="MP4_output"):
+def downloadMP4(link:str, newTitleOn:bool=False, pathForMp4output:str="MP4_output"):
     youtubeObject = YouTube(link)
     youtubeObject = youtubeObject.streams.get_highest_resolution()
     try:
@@ -137,7 +137,7 @@ def newTitleChoice():
 #à l'utilisateur son choix de format
 def startDownload(listeLiensVideos:list,newTitleOn:bool=False, choixFormatFichier:int=0):
     #go to project directory
-    pathFileForProject = findFileWithPath("YtubeDownloader/python_script_download")
+    pathFileForProject = findFileWithPath("VideoConverter/python_script_download")
     os.chdir(pathFileForProject)
     if(len(listeLiensVideos) == 0): #pas de vidéos à traiter
         return
@@ -147,12 +147,12 @@ def startDownload(listeLiensVideos:list,newTitleOn:bool=False, choixFormatFichie
     if(choixFormatFichier == 2):
         for fichier in listeLiensVideos:
             #print("les liens vidéos à traiter : "+el)
-            DownloadMP4(fichier, newTitleOn)
+            downloadMP4(fichier, newTitleOn)
 
     elif(choixFormatFichier == 1):
         for fichier in listeLiensVideos:
             #print("les liens vidéos à traiter : "+el)
-            DownloadMP3(fichier, newTitleOn)
+            downloadMP3(fichier, newTitleOn)
 
 #ajouter une fonctionnalité de mutli-threading pour permettre le multi-téléchargement et autoriser l'utilisation d'une liste 
 #d'argument et montrer d'autres compétences

@@ -112,6 +112,8 @@ Pour résoudre :
 
 -->  npm i rxjs@7.5.2
 
+--> yarn add rxjs
+
 - An unhandled exception occurred: Cannot find module '@angular-devkit/architect/node'
 
 -->  passer par yarn pour instaler devkit/archtiect/node :

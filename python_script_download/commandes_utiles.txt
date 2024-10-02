@@ -14,3 +14,5 @@ find ~ -path \*@angular/cli/bin/ng
 find ~ -path \*site-packages/pytube -print -quit
 
 
+find ~ -path \*yarn
+

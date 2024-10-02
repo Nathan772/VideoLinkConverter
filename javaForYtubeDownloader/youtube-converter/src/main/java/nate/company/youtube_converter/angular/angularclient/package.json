@@ -10,7 +10,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/architect": "^0.1802.6",
     "@angular-devkit/core": "^18.2.6",
     "@angular-devkit/schematics": "^18.2.6",
     "@angular/animations": "^18.2.0",
@@ -21,13 +20,11 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
-    "rxjs": "^7.5.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.6",
-    "@angular-devkit/architect/node": "^0.1802.6",
     "@angular/cli": "^18.2.6",
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",

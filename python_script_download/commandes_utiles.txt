@@ -11,3 +11,6 @@ find ~ -path \*@angular-devkit
 find ~ -path \*@angular/cli/bin/ng
 
 
+find ~ -path \*site-packages/pytube -print -quit
+
+

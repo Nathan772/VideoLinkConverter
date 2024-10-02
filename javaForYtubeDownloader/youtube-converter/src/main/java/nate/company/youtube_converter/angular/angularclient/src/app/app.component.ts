@@ -15,6 +15,9 @@ deprecated
 */
 
 import { Component } from '@angular/core';
+/*import { Routes, RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module'
+*/
 
 @Component({
   selector: 'app-root',

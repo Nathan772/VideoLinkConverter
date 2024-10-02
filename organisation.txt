@@ -6,7 +6,17 @@ Le site qui sert de référence :
 
 Pour installer spring : 
 
-- télécharger les jar associés aux versions de spring que vous souhaitez utiliser.
+- télécharger les jar associés aux versions de spring que vous souhaitez utiliser ou récupérez ceux du dossier 
+
+VideoConverter/Dependeciens_for_video_converter
+
+Ils permettront de résoudre:
+
+- If you want an embedded database (H2, HSQL or Derby), please put it on the classpath
+
+
+
+
 - les jars sont sur le site de maven : https://mvnrepository.com/  > leurs références sont directement accessibles
 - ajouter les jars au build de votre projet pour que cela soit aussi reconnu dans le fichier pom.xml (si vous ne le faites pas, ils ne seront pas reconnus et
 apparaitront en rouge) : https://www.geeksforgeeks.org/how-to-add-external-jar-file-to-an-intellij-idea-project/

@@ -153,3 +153,8 @@ bugs à l'installation.
 yarn add rxjs
 
 ```
+
+Autre chose, il est possible qu'au lancement du projet, votre page charge 
+mais celle-ci détecte une erreur dans une portion du code angular, alors qu'il n'est pas 
+censé en avoir à cet endroit qui est supposé être sûr.
+Dans ce cas, c'est peut être un bug d'angular, supprimer puis remettez la partie problématique, cela pourrait refonctionner dans certains cas (c'est déjà arrivé).

@@ -13,7 +13,7 @@ import java.util.Objects;
 il existe déjà une table de nom "User" donc on renomme
 avec @Table name="..." en précisant le nouveau nom de la table que l'on souhaite créer
  */
-@Table(name="_USER")
+@Table(name="user")
 public class User {
     /*
     Id et generatedValue ont été

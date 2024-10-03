@@ -159,3 +159,16 @@ de la variable et aussi un
 constructeur de service qui n'utilisait pas
 le mot "this" + le paramètre
 service qui était privé
+
+
+Remarque pour la bdd :
+
+spring ne semble reconnaitre les noms de table qui ne sont écrits qu'en minuscule,
+comme le recommande la convention.
+Ainsi si le @Table(name="nomTable") contient des majuscules,
+elles seront transformées en minuscule.
+Ainsi, si la table existe déjà, mais porte une majuscule, alors une nouvelle table
+sera créée et sera écrite en minuscule.
+
+Pour voir comment préciser l'utilisateur et la bdd choisie, 
+allez voir dans le fichier angular_organisation.md

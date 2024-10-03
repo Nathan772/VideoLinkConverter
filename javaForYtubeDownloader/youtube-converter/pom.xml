@@ -55,6 +55,22 @@
 		</dependency>
 
 
+		<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+		<!--
+		nécessaire pour résoudre l'erreur :
+
+		Failed to load driver class com.mysql.jdbc.Driver
+		liée aux modifications de application.properties
+		lié à la bdd
+		-->
+
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<version>9.0.0</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>

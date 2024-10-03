@@ -154,7 +154,44 @@ yarn add rxjs
 
 ```
 
+essayez aussi de désinstaller rxjs pour yarn et pour npm.
+Puis de réinstaller si nécessaire.
+
 Autre chose, il est possible qu'au lancement du projet, votre page charge 
 mais celle-ci détecte une erreur dans une portion du code angular, alors qu'il n'est pas 
 censé en avoir à cet endroit qui est supposé être sûr.
 Dans ce cas, c'est peut être un bug d'angular, supprimer puis remettez la partie problématique, cela pourrait refonctionner dans certains cas (c'est déjà arrivé).
+
+Pour updater les données de la bdd de façon persistante, il faut modifier le fichier
+"application.properties" : 
+
+```properties
+
+spring.application.name=youtube-converter
+spring.datasource.url=jdbc:mysql://localhost:3306/votreBDD
+spring.datasource.username=votre_nom_utilisateur
+spring.datasource.password=votre_mdp
+spring.jpa.hibernate.ddl-auto=update
+```
+
+voir : 
+
+https://www.geeksforgeeks.org/spring-boot-how-to-access-database-using-spring-data-jpa/
+
+Il faut aussi modifier le pom.xml pour permettre de connecter la base:
+```xml
+<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+		<!--
+		nécessaire pour résoudre l'erreur :
+
+		Failed to load driver class com.mysql.jdbc.Driver
+		liée aux modifications de application.properties
+		lié à la bdd
+		-->
+
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<version>9.0.0</version>
+		</dependency>
+```

@@ -37,11 +37,22 @@ export class UserFormComponent implements OnInit {
   constructor(routerParam: Router,service: UserService) {
     this.router = routerParam;
     this.userService =service;
-    this.user = {id:"5", name:"jean", email:"jeanValjean"}
+    /*nécessaire même si sera remplacé
+    car cela correspond aux valeurs par défaut de l'utilisateur
+    même si l'id pourrait causer un conflit,
+    en pratique ce n'est pas le cas
+    car il est aussi automatiquement
+    remplacé par la base de donnée
+    par le suivant du serial !!
+    */
+    this.user = {id:"5", name:"", email:""}
   }
-
-  onSubmit() {
+  registerNewUser() {
     //le goto , redirige vers le /users path
+    /*
+    on appelle le save de user-service
+    pour sauvegarder en base en appelant en fait du java
+    */
     this.userService.save(this.user).subscribe(
       result => this.gotoUserList());
   }

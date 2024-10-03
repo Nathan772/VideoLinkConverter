@@ -9,13 +9,25 @@ ajouté via baeldung
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
+        <th scope="col">Remove ?</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let user of users">
+
         <td>{{ user.id }}</td>
         <td>{{ user.name }}</td>
         <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+        <!-- remove user button -->
+        <td>
+        <form (ngSubmit)="removeUser(user)"#userRemoveForm="ngForm">
+        <button type="submit"
+                class="btn btn-info">remove</button>
+          </form>
+        </td>
+
+
+
       </tr>
       </tbody>
     </table>

@@ -13,12 +13,17 @@ import { UserListComponent } from './user/user_list/user-list.component';
 import { UserFormComponent } from './user/user_form/user-form.component';
 import { UserService } from './user/user_service/user-service.service';
 import {RouterModule} from '@angular/router';
+import { VideoDLServiceService } from './videoDL/videoDLService/video-dlservice.service';
+import {VideoDLFormComponent } from './videoDL/videoDLForm/video-dl-form.component';
+import {VideoListComponent } from './videoDL/videoList/video-list.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       UserListComponent,
       UserFormComponent,
+      VideoListComponent,
+      VideoDLFormComponent,
     ],
   imports: [
       BrowserModule,
@@ -27,7 +32,7 @@ import {RouterModule} from '@angular/router';
       FormsModule,
       RouterModule
     ],
-  providers: [UserService],
+  providers: [UserService, VideoDLServiceService],
   bootstrap:[AppComponent],
 })
 export class AppModule { }

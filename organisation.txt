@@ -172,3 +172,14 @@ sera créée et sera écrite en minuscule.
 
 Pour voir comment préciser l'utilisateur et la bdd choisie, 
 allez voir dans le fichier angular_organisation.md
+
+
+Adresse déjà utilisée :
+
+trouver : 
+
+lsof -ti :$PORT
+
+kill: 
+
+kill $(lsof -ti :$PORT)

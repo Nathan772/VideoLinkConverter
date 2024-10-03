@@ -47,9 +47,13 @@ export class UserFormComponent implements OnInit {
     */
     this.user = {id:"5", name:"", email:""}
   }
-
-  onSubmit() {
+/* ancien nom "OnSubmit" */
+  registerNewUser() {
     //le goto , redirige vers le /users path
+    /*
+    on appelle le save de user-service
+    pour sauvegarder en base en appelant en fait du java
+    */
     this.userService.save(this.user).subscribe(
       result => this.gotoUserList());
   }

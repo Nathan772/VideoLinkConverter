@@ -41,8 +41,8 @@ public class User {
      */
 
     public User(){
-        this.name = "Jean";
-        this.email = "Valjean";
+        this.name = "";
+        this.email = "";
     }
 
     /*

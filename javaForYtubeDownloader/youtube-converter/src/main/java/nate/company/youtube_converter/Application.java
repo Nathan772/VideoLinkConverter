@@ -34,10 +34,12 @@ public class Application {
     @Bean
     CommandLineRunner init(UserRepository userRepository) {
         return args -> {
+            /*pas nécessaire sauf si on veut tester l'ajout en brut
+            sans passer par l'application Web
             Stream.of("JohnD", "JulieB", "Jennifer", "Helen", "Rachel").forEach(name -> {
                 User user = new User(name, name.toLowerCase() + "@domain.com");
                 userRepository.save(user);
-            });
+            });*/
             userRepository.findAll().forEach(System.out::println);
         };
     }

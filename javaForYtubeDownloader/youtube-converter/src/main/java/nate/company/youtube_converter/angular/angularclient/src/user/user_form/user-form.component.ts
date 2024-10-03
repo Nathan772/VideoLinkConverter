@@ -47,7 +47,6 @@ export class UserFormComponent implements OnInit {
     */
     this.user = {id:"5", name:"", email:""}
   }
-/* ancien nom "OnSubmit" */
   registerNewUser() {
     //le goto , redirige vers le /users path
     /*

@@ -1,5 +1,11 @@
 Pour angular :
 
+
+lancer le projet :
+
+1) il faut se placer dans angularclient
+2) tapez : ng serve --open
+
 -npm install -g @angular/cli@1.7.4
 
 lancer cette commande dans le terminal, dans le dossier du projet, pour générer automatiquement les différentes pages webs angular.
@@ -195,3 +201,20 @@ Il faut aussi modifier le pom.xml pour permettre de connecter la base:
 			<version>9.0.0</version>
 		</dependency>
 ```
+
+
+Pour générer automatiquement des fichiers :
+
+1) on crée le dossier associé au composant puis...
+
+2) ... selon les besoin :
+
+-ng generate service user-service
+-ng generate component user-form
+-ng generate component user-list
+-ng generate class user
+
+
+ng generate component videoDL-form
+ng generate service videoDLService
+

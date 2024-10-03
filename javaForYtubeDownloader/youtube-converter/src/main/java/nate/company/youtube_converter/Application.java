@@ -5,6 +5,8 @@ package nate.company.youtube_converter;
  */
 import nate.company.youtube_converter.siteTools.User;
 import nate.company.youtube_converter.siteTools.UserRepository;
+import nate.company.youtube_converter.siteTools.Video;
+import nate.company.youtube_converter.siteTools.VideoRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,7 +34,7 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner init(UserRepository userRepository) {
+    CommandLineRunner init(UserRepository userRepository, VideoRepository videoRepository) {
         return args -> {
             /*pas nécessaire sauf si on veut tester l'ajout en brut
             sans passer par l'application Web
@@ -40,7 +42,13 @@ public class Application {
                 User user = new User(name, name.toLowerCase() + "@domain.com");
                 userRepository.save(user);
             });*/
+            Stream.of("https://www.youtube.com/watch?v=fAZUbQRf6DI",
+                    "https://www.youtube.com/watch?v=e6brGv5af3w").forEach(link -> {
+                Video video = new Video(link);
+                videoRepository.save(video);
+            });
             userRepository.findAll().forEach(System.out::println);
+            videoRepository.findAll().forEach(System.out::println);
         };
     }
 }

@@ -18,11 +18,11 @@ export class VideoDLServiceService {
     }
 
   /**
-  This method enables to prepare a new video link for a download
+  This method enables to prepare the video name for a new video link for a download
   */
-    ajoutVideoDL(videoName:string){
+  public ajoutVideoDL(videoName:string){
       this.videoChosenForDL = videoName;
-   }
+  }
 
     /**
      retrive all the videos downloaded so far by every users
@@ -31,15 +31,16 @@ export class VideoDLServiceService {
       return this.http.get<Video[]>(this.videosUrl);
     }
 
-  /* sauvegarde en base une vidéo choisie
+  /** sauvegarde en base une vidéo choisie
   la méthode save réalise une requête avec
   l'@ "'http://localhost:8080/videos'"
   du constructor.
   Elle est liée à "addVideo"  du
   VideoController.java
-
+  @return
+  the Observable<video> with its true id (not the false) to retrieve it in the database system.
   */
-    public save(video: Video) {
+    public save(video: Video):Observable<Video> {
       console.log("On sauvegarde une nouvelle vidéo : "+video);
       return this.http.post<Video>(this.videosUrl, video);
     }
@@ -49,9 +50,10 @@ export class VideoDLServiceService {
    the link in post has to match with the link in the VideoController
    method one wants to call
    */
-  public prepareVideo(video: Video) {
-        console.log("On télécharge une nouvelle vidéo : "+videod);
-        return this.http.post<Video>(this.videosUrl+"/download", video);
+  public prepareVideo(video: Video): Observable<string>{
+        console.log("On télécharge une nouvelle vidéo : "+video);
+        //replace by get to display video's name
+        return this.http.get<Video>(this.videosUrl+"/download", video);
   }
 
   /**

@@ -4,6 +4,7 @@ import nate.company.youtube_converter.siteTools.UserRepository;
 import nate.company.youtube_converter.siteTools.Video;
 import nate.company.youtube_converter.siteTools.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,6 +76,37 @@ public class VideoController {
         System.out.println(" on ajoute la vidéo : "+video);
         videoRepository.save(video);
     }
+
+
+
+
+    /**
+     * the addVideo add a new video in the data based, when this one
+     * is passed through the request body
+     * normally we would need to add controller implementation, in order to check if user data is validate or not
+     * but to keep it simple we didnt did it here but you can find how in the baledung page
+     * at "Spring boot validation" click link.
+     * Elle est liée à la méthode "save" de vide-dlservice.service.ts
+     * d'où le fait qu'elle appelle save
+     * @param video
+     */
+    @PostMapping("/videos")
+    public ResponseEntity<String> downloadVideo(@RequestBody Video video){
+        System.out.println(" on télécharge la vidéo : "+video);
+        var videoName = "backOn";
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(videoName);
+
+    }
+
+
+
+
+
+
+
+
+
+
 
     /**
      * this method enables to delete a user based on their id.

@@ -36,46 +36,46 @@ export class VideoDLFormComponent implements OnInit {
     remplacé par la base de donnée
     par le suivant du serial !!
     */
-    this.video = {id:"5", link:""}
+    this.video = {title: "", id:"5", link:""}
   }
 
-/*
-prépare la page de téléchargement + enregistre la vidéo en base
-*/
-dlNewVideo(){
-  //save the video link + its id (il faudra changer par sauvegarde or update)
-  this.videoService.save(this.video).subscribe(actualVideoWithTrueID =>
+  /*
+  prépare la page de téléchargement + enregistre la vidéo en base
+  */
+  dlNewVideo(){
+    //save the video link + its id (il faudra changer par sauvegarde or update)
+    this.videoService.save(this.video).subscribe(actualVideoWithTrueID =>
+        //this.stayHere()
+          /*
+          perform the video downloadThrough java method
+          and then,
+          go to the downloadPage
+          */
+          {
+            this.videoService.prepareVideo(actualVideoWithTrueID).subscribe(video =>
+                    {
+                      /*
+                      retrieve the name of the video to display it to the user later
+                      */
+                      //fonctionnel
+                      this.videoService.ajoutVideoDL(video.title);
+                      /*send the updated service to the app component in order to let
+                          him send the name of the file + the path for download to another component (videoDLPage)
+                          is it necessary to be in waiting + receving mode to receive the data sent by emitter ???
+                        (EMIT seems to work and update the service)
+                        */
+                        this.serviceEmit.emit(this.videoService);
+                        /*
+                        the downlaod link is ready , just go to the downloadPage to enable it
+                        (mayba later could retrieve the path for the download Link)
+                        */
+                        this.goToDownloadPage();
+                    }
+            );
+          }
 
-
-    //this.stayHere()
-      /*
-      perform the video downloadThrough java method
-      and then,
-      go to the downloadPage
-      */
-      this.videoService.prepareVideo(actualVideoWithTrueID).subscribe(videoName =>
-        /*
-        retrieve the name of the video to display it to the user later
-        */
-        this.videoService.ajoutVideoDL(videoName)
-        /*send the updated service to the app component in order to let
-          him send the name of the file + the path for download to another component (videoDLPage)
-          is it necessary to be in waiting + receving mode to receive the data sent by emitter ???
-        */
-        this.serviceEmit.emit(this.videoService);
-        /*
-        the downlaod link is ready , just go to the downloadPage to enable it
-        */
-        this.goToDownloadPage()
-        );
-
-
-    );
-
-
-
-
-}
+    )
+  }
 
 stayHere(){
     this.router.navigate(['/videos/form']);

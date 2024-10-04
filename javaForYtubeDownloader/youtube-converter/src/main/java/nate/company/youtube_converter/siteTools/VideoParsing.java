@@ -157,6 +157,8 @@ public class VideoParsing {
         launchCommandWithOutput(strBuilder.toString(), true);
 
         //need to retrieve the path with the fileName and return it for downloadLink in frontend
+        //maybe I can write it in a specific .txt file, and parse it to retrieve. It would be a way
+        // of interacting java with python
 
     }
 

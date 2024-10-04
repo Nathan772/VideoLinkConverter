@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Video } from '../video';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +21,10 @@ export class VideoDLServiceService {
   */
   public ajoutVideoDL(videoName:string){
       this.videoChosenForDL = videoName;
+  }
+
+  public getVideoChosenForDL():string{
+    return this.videoChosenForDL;
   }
 
     /**
@@ -49,11 +52,14 @@ export class VideoDLServiceService {
    this video does the video preparation on the server part.
    the link in post has to match with the link in the VideoController
    method one wants to call
+
+   notice : you can only retrieve as observable-compatible
+   something that is defined as a controller and repository in java
    */
-  public prepareVideo(video: Video): Observable<string>{
+  public prepareVideo(video: Video): Observable<Video>{
         console.log("On télécharge une nouvelle vidéo : "+video);
         //replace by get to display video's name
-        return this.http.get<Video>(this.videosUrl+"/download", video);
+        return this.http.post<Video>(this.videosUrl+"/download",video);
   }
 
   /**

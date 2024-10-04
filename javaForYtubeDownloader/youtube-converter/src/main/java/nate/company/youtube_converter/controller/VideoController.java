@@ -104,17 +104,55 @@ public class VideoController {
      * @param video
      */
     //fonctionne via postman
-    @GetMapping("/videos/download")
-    public String downloadVideo(@RequestBody Video video){
+    // le transfert de données entre
+    //les deux ne marchent que via des types associés à des controllers...
+    // il faut encore tester en créant un type string en interface, mais peu crédible...
+    /*
+    à réutiliser
+    @PostMapping("/videos/download")
+    public Video downloadVideo(@RequestBody Video video){
         System.out.println("on télécharge la vidéo avec l'id : "+video.getId());
         //remplacer l'id de videoName par le title qui sera récupéré
         var videoInDb = videoRepository.findById(video.getId());
+
         //par l'API Python
         var videosLink = new String[1];
         videosLink[0] = video.getLink();
         startingPointForDownload(videosLink);
-        var videoName = "backOn";
-        return videoName;
+
+        if(videoInDb.isPresent()){
+            return videoInDb.get();
+        }
+        return null;
+
+    }*/
+
+    /**
+     * the addVideo add a new video in the data based, when this one
+     * is passed through the request body
+     * normally we would need to add controller implementation, in order to check if user data is validate or not
+     * but to keep it simple we didnt did it here but you can find how in the baledung page
+     * at "Spring boot validation" click link.
+     * Elle est liée à la méthode "save" de vide-dlservice.service.ts
+     * d'où le fait qu'elle appelle save
+     * C'est fonctionnel du pdv de postman
+     * @param video
+     */
+    @PostMapping("/videos/download")
+    public Video downloadVideo(@RequestBody Video video){
+        System.out.println("on télécharge la vidéo avec l'id : "+video.getId());
+        //remplacer l'id de videoName par le title qui sera récupéré
+        //save works just like update if the entity already existe with this
+        // id
+        video.setTitle("Back on Wesh");
+        //update pour préciser le titre de la vidéo !
+        //save est équivalent à update, il met à jour si un objet existe déjà avec cet id
+        videoRepository.save(video);
+        /* préparation du fichier avec l'API Python */
+        var videosLink = new String[1];
+        videosLink[0] = video.getLink();
+        startingPointForDownload(videosLink);
+        return video;
 
     }
 

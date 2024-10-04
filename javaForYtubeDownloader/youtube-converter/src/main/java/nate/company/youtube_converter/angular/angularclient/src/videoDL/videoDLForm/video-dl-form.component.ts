@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Video } from '../video';
 import { VideoDLServiceService } from '../videoDLService/video-dlservice.service'
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,13 @@ export class VideoDLFormComponent implements OnInit {
   videoService:VideoDLServiceService;
   video:Video;
 
+  /*
+  emiter that will enable to send the urlLink to the father (app.component)
+  each time a new link is prepared.
+  It will enable other component to use it.
+  */
+  @Output()
+  serviceEmit = new EventEmitter<VideoDLServiceService>();
   /*
   le user service du constructeur permet d'être utilisé
   pour sauvegarder la vidéo
@@ -31,15 +38,48 @@ export class VideoDLFormComponent implements OnInit {
     */
     this.video = {id:"5", link:""}
   }
+
+/*
+prépare la page de téléchargement + enregistre la vidéo en base
+*/
+dlNewVideo(){
+  //sauvegarde en base le lien (il faudra changer par sauvegarde or update)
+  this.videoService.save(this.video).subscribe(result => this.stayHere());
+
+  /*
+  send the updated service to the app component in order to let
+  him send the name of the file + the path for download to another component (videoDLPage)
+  */
+  this.serviceEmit.emit(this.videoService);
+
+  /*
+  perform the video downloadThrough java method
+  and then,
+  go to the downloadPage
+  */
+  this.videoService.prepareVideo(this.video);//.subscribe(result => this.goToDownloadPage());
+}
+
+stayHere(){
+    this.router.navigate(['/videos/form']);
+}
+
+/**
+ this method enables to go to the downloadPage for a video
+ in order to download it.
+ */
+goToDownloadPage(){
+  this.router.navigate(['/videos/downloadPage']);
+}
+
+  /*
   registerNewVideo() {
     //le goto , redirige vers le /users path
-    /*
-    on appelle le save de user-service
-    pour sauvegarder en base en appelant en fait du java
-    */
+    //on appelle le save de user-service
+    //pour sauvegarder en base en appelant en fait du java
     this.videoService.save(this.video).subscribe(
       result => this.gotoVideoList());
-  }
+  }*/
 
   gotoVideoList() {
       this.router.navigate(['/videos']);

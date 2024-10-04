@@ -16,6 +16,7 @@ import {RouterModule} from '@angular/router';
 import { VideoDLServiceService } from './videoDL/videoDLService/video-dlservice.service';
 import {VideoDLFormComponent } from './videoDL/videoDLForm/video-dl-form.component';
 import {VideoListComponent } from './videoDL/videoList/video-list.component';
+import {VideoDLPageComponent } from './videoDL/videoDLPage/video-dlpage.component';
 
 @NgModule({
    declarations: [
@@ -24,6 +25,7 @@ import {VideoListComponent } from './videoDL/videoList/video-list.component';
       UserFormComponent,
       VideoListComponent,
       VideoDLFormComponent,
+      VideoDLPageComponent
     ],
   imports: [
       BrowserModule,

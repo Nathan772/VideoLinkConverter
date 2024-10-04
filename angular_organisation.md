@@ -218,3 +218,5 @@ Pour générer automatiquement des fichiers :
 ng generate component videoDL-form
 ng generate service videoDLService
 
+ng generate component videoDLPage
+

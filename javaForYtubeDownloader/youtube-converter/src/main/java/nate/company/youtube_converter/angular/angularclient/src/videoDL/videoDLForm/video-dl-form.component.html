@@ -1,1 +1,45 @@
-<p>video-dl-form works!</p>
+<!--
+
+écrit en reprenant le code de baeldung
+
+-->
+
+<div class="card my-5">
+  <div class="card-body">
+
+    <!-- début formulaire -->
+
+    <form (ngSubmit)="dlNewVideo()" #linkForm="ngForm">
+
+      <!--input pour
+      le nom du user -->
+      <div class="form-group">
+
+
+        <label for="link">Lien : </label>
+        <!-- register the videoLink in link field of the
+        field video-->
+        <input type="text" [(ngModel)]="video.link"
+               class="form-control"
+               id="link"
+               name="link"
+               placeholder="Enter your video link"
+               required #link="ngModel">
+
+
+      </div>
+
+
+      <div [hidden]="!link.pristine" class="alert alert-danger">link is required</div>
+
+
+      <button type="submit" [disabled]="!linkForm.form.valid"
+              class="btn btn-info"> Chercher la vidéo </button>
+
+
+    </form>
+
+    <!-- fin formulaire -->
+
+  </div>
+</div>

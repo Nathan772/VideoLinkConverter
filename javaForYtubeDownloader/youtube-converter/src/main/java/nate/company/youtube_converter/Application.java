@@ -41,12 +41,18 @@ public class Application {
             Stream.of("JohnD", "JulieB", "Jennifer", "Helen", "Rachel").forEach(name -> {
                 User user = new User(name, name.toLowerCase() + "@domain.com");
                 userRepository.save(user);
-            });*/
-            Stream.of("https://www.youtube.com/watch?v=fAZUbQRf6DI",
+            });
+             */
+
+            //même chose, mais pour les vidéos
+
+           /* Stream.of("https://www.youtube.com/watch?v=fAZUbQRf6DI",
                     "https://www.youtube.com/watch?v=e6brGv5af3w").forEach(link -> {
                 Video video = new Video(link);
                 videoRepository.save(video);
-            });
+            });*/
+
+            System.out.println(" les données en base de données : ");
             userRepository.findAll().forEach(System.out::println);
             videoRepository.findAll().forEach(System.out::println);
         };

@@ -46,10 +46,12 @@ export class VideoDLServiceService {
 
   /**
    this video does the video preparation on the server part.
+   the link in post has to match with the link in the VideoController
+   method one wants to call
    */
   public prepareVideo(video: Video) {
-        console.log("On télécharge une nouvelle vidéo : "+video+ " en préparation, il faut modifier videoDL-Form et videodlservice...");
-        //return this.http.post<Video>(this.videosUrl, video);
+        console.log("On télécharge une nouvelle vidéo : "+videod);
+        return this.http.post<Video>(this.videosUrl+"/download", video);
   }
 
   /**

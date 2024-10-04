@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import shlex
-from pytube import YouTube
+#from pytube import YouTube
 import subprocess
 from moviepy.editor import *
 import re
@@ -11,6 +11,9 @@ import sys
 import traceback
 import os
 
+#remplacement pour pytube
+from pytubefix import YouTube 
+from pytubefix.cli import on_progress
 
 
 #code récupéré d'internet 
@@ -20,35 +23,28 @@ import os
 #créer un fichier à inclure qui gère entièrement la transformation d'un fichier mp3 en fichier mp4 et ensuite appeler
 # une méthode de ce fichier dans downloadMP3
 # download MP3 appel downloadMP4 puis appel ce fichier à inclure sur le fichier puis supprime le fichier au format mp4
-def downloadMP3(link, newTitleOn:bool=False, Mp3_outputPath:str="MP3_output",Mp4_outputPath:str="MP4_output"):
+def downloadMP3(link, newTitleOn:bool=False, Mp3_outputPath:str="/home/nathanb/Bureau/Bureau/Bureau/Perso/projets_développement_informatique/VideoConverterPersonalFiles/MP3_output"):
     try:
-        oldTitle = downloadMP4(link, newTitleOn)
 
-        #recupère la vidéo MP4 (BEGINNING)
+        #from ytubefix official manual
+        yt = YouTube(link, on_progress_callback = on_progress)
+        newTitle = yt.title
+        ys = yt.streams.get_audio_only()
+        ys.download(mp3=True)
 
-        print("le titre du fichier MP4 est : "+oldTitle)
+        #update du titre de l'audio si nécessaire
+        if(newTitleOn):
+            newTitle = updateFileTitle(yt.title+".mp3", ".mp3")
+            print("titre mis à jour")
 
-        #récupère le path vers le dossier des fichiers MP4
-        MP4_outputPath = Mp4_outputPath
+        #on garde l'ancien titre
+        else:
+            newTitle = newTitle+".mp3"
+            print("on garde le titre par défaut")
         
+        subprocess.call(["mv",newTitle,Mp3_outputPath])
 
-        #recupère la vidéo MP4
-        videoMP4 = VideoFileClip(Mp4_outputPath+"/"+oldTitle)
-        #renomme l'ancient titre avec son titre version mp3
-        newTitle = oldTitle.replace(".mp4", ".mp3")
-
-
-        #récupère le path vers le dossier des fichiers MP3
-
-        MP3_outputPath = Mp3_outputPath
-
-        #recupère la vidéo MP4 (ENDING)
-
-        #converti l'audio MP4 en mp3 avec son path et son nouveau titre
-        videoMP4.audio.write_audiofile(MP3_outputPath+"/"+newTitle)
-        
-        #supprime la version mp4 qui est inutile
-        subprocess.call(["rm",MP4_outputPath+"/"+oldTitle])
+        #on renvoie le nouveau titre du fichier sans le path
         return newTitle
 
     except Exception as error_message:
@@ -59,15 +55,15 @@ def downloadMP3(link, newTitleOn:bool=False, Mp3_outputPath:str="MP3_output",Mp4
 
 #utiliser les commandes terminales pour changer le titre de la vidéo
 #renvoie le nouveau titre
-def updateFileTitle(fileName: str):
+def updateFileTitle(fileName: str, extension:str=".mp3"):
     newTitle = ""
     while(newTitle == "" or len(newTitle) > 100):
         print("L'ancien titre du fichier est : "+fileName+"\n")
         newTitle = input("Donnez le nouveau titre du fichier(max 100 caractères pour éviter les scripts) :  \n")
 
     #update du nom
-    subprocess.call(["mv",fileName,newTitle+".mp4"])
-    return newTitle+".mp4"
+    subprocess.call(["mv",fileName,newTitle+extension])
+    return newTitle+extension
             
     
 
@@ -80,12 +76,13 @@ def findFileWithPath(pathBegin:str):
     subprocess.call(strForSubProcess, shell=True)
     #récupère la chaine renvoyée à la sortie standard en vraie chaine
     pathSearchedInBytes = subprocess.check_output(strForSubProcess, shell=True)
-    actualStr = pathSearchedInBytes.decode('utf-8').rstrip()
-    return actualStr
+    actualStrForPath = pathSearchedInBytes.decode('utf-8').rstrip()
+    #print("le path est : "+actualStrForPath)
+    return actualStrForPath
 
 
-def downloadMP4(link:str, newTitleOn:bool=False, pathForMp4output:str="MP4_output"):
-    youtubeObject = YouTube(link)
+def downloadMP4(link:str, newTitleOn:bool=False, pathForMp4output:str="/home/nathanb/Bureau/Bureau/Bureau/Perso/projets_développement_informatique/VideoConverterPersonalFiles/MP4_output"):
+    youtubeObject = YouTube(link, on_progress_callback = on_progress)
     youtubeObject = youtubeObject.streams.get_highest_resolution()
     try:
         #se déplace vers le dossier pour les fichiers MP4
@@ -94,7 +91,7 @@ def downloadMP4(link:str, newTitleOn:bool=False, pathForMp4output:str="MP4_outpu
         newTitle = youtubeObject.title
         print("Le titre de la vidéo MP4 est : "+newTitle)
         if(newTitleOn):
-            newTitle = updateFileTitle(youtubeObject.title+".mp4")
+            newTitle = updateFileTitle(youtubeObject.title+".mp4", ".mp4")
             print("titre mis à jour")
         else:
             newTitle = newTitle+".mp4"
@@ -104,7 +101,8 @@ def downloadMP4(link:str, newTitleOn:bool=False, pathForMp4output:str="MP4_outpu
             
         MP4_outputPath = pathForMp4output
         print("le new title est : "+newTitle+"\n\n")
-        print("le dossier pour MP4 EST : "+MP4_outputPath+"\n")
+        print("le dossier pour votre fichier MP4 EST : "+MP4_outputPath+"\n")
+        #subprocess.call(["pwd"])
         subprocess.call(["mv",newTitle,MP4_outputPath])
 
         #on renvoie le nouveau titre du fichier sans le path
@@ -138,6 +136,12 @@ def newTitleChoice():
 def startDownload(listeLiensVideos:list,newTitleOn:bool=False, choixFormatFichier:int=0):
     #go to project directory
     pathFileForProject = findFileWithPath("VideoConverter/python_script_download")
+
+
+    mp3Path = findFileWithPath("VideoConverterPersonalFiles/MP3_output")
+    mp4Path = findFileWithPath("VideoConverterPersonalFiles/MP4_output")
+    #downloadMP4(fichier, newTitle, Mp3_outputPath:str="VideoConverterPersonalFiles/MP3_output",Mp4_outputPath:str="VideoConverterPersonalFiles/MP4_output")
+
     os.chdir(pathFileForProject)
     if(len(listeLiensVideos) == 0): #pas de vidéos à traiter
         return
@@ -145,14 +149,16 @@ def startDownload(listeLiensVideos:list,newTitleOn:bool=False, choixFormatFichie
         choixFormatFichier = int(input("Voulez-vous convertir en un fichier mp3 (1) ou mp4 (2)? : \n"))
 
     if(choixFormatFichier == 2):
+        print("Le dossier pour vos fichiers mp3 est : "+mp4Path)
         for fichier in listeLiensVideos:
             #print("les liens vidéos à traiter : "+el)
-            downloadMP4(fichier, newTitleOn)
+            downloadMP4(fichier, newTitleOn, mp4Path)
 
     elif(choixFormatFichier == 1):
+        print("Le dossier pour vos fichiers mp3 est : "+mp3Path)
         for fichier in listeLiensVideos:
             #print("les liens vidéos à traiter : "+el)
-            downloadMP3(fichier, newTitleOn)
+            downloadMP3(fichier, newTitleOn, mp3Path)
 
 #ajouter une fonctionnalité de mutli-threading pour permettre le multi-téléchargement et autoriser l'utilisation d'une liste 
 #d'argument et montrer d'autres compétences

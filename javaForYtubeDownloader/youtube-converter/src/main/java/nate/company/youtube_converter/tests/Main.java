@@ -210,8 +210,8 @@ public class Main {
          script python
         */
         var args2 = new String[2];
-        args2[0] = "https://www.youtube.com/watch?v=dxTN3X9tFUE";
-        args2[1] = "https://www.youtube.com/watch?v=sML_1FMTn6c";
+        args2[0] = "https://www.youtube.com/watch?v=SpHGozu2Y28";
+        args2[1] = "https://www.youtube.com/watch?v=Gz6ocmv8Gck";
         launchFile(filePath, args2);
     }
 }

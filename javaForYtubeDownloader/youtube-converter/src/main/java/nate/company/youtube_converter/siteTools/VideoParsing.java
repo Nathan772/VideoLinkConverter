@@ -1,12 +1,22 @@
-package nate.company.youtube_converter.tests;
+package nate.company.youtube_converter.siteTools;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
+public class VideoParsing {
 
-public class Main {
+    /*
+
+       USEFUL for java
+     */
+
+
+
+
+
+
     /**
      * This method waits for python stdout and display the result of the command.
      */
@@ -89,61 +99,6 @@ public class Main {
         return terminalOutput.toString();
 
     }
-    /*
-    deprecated,old version
-    private static String launchCommandWithOutput(String terminalCommand, boolean isFile){
-        Objects.requireNonNull(terminalCommand, "command used cannot be null.");
-        Process process = null;
-        var terminalOutput = new StringBuilder();
-        String line;
-        String lineErr;
-        try {
-            var command = new String[3];
-            //shell call
-            command[0] = "sh";
-            command[1] = "-c";
-            //commande expected
-
-            command[2] = terminalCommand;//commandFileFind;
-            process = Runtime.getRuntime().exec(command);
-
-            //from stack : https://stackoverflow.com/questions/3403226/how-to-run-linux-commands-in-java
-            //how to handle it ??
-            if(!isFile) {
-                //should only wait for commands that don't wait
-                // user input
-                process.waitFor();
-            }
-
-            if(isFile) {
-                //retrieve terminal output
-//                BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//                BufferedReader stdErrorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-//                System.out.println("il y a des lignes à lire : ");
-//                //display stdout
-//                while ((line = inputReader.readLine()) != null) {
-//                    System.out.println("il y a une ligne : " + line + "+ à lire");
-//                    //add each output lines
-//                    System.out.println(line);
-//                    terminalOutput.append(line);
-//                }
-//                //display error (stderr)
-//                while ((lineErr = stdErrorReader.readLine()) != null) {
-//                    System.out.println(lineErr);
-//                }
-                waitAndDisplay(process, terminalOutput);
-            }
-        } catch (IOException e) {
-            throw new AssertionError("Use of incorrect command line " + e);
-        } catch (InterruptedException e) {
-            throw new AssertionError("Process waiter for terminal command interrupted");
-        } finally {
-            if(process != null && process.isAlive())
-                process.destroy();
-        }
-        return terminalOutput.toString();
-
-    }*/
 
     /**
      * this method enables to find the absolute position for a specific file.
@@ -201,9 +156,12 @@ public class Main {
         System.out.println("la commande à lancer : "+strBuilder.toString()+"\n");
         launchCommandWithOutput(strBuilder.toString(), true);
 
+        //need to retrieve the path with the fileName and return it for downloadLink in frontend
+
     }
 
-
-
-
+    public static void startingPointForDownload(String[] args) {
+        var filePath = fileAbsolutePathPositionWithBeginning("VideoConverter/python_script_download/yDownloaderForJava.py");
+        launchFile(filePath, args);
+    }
 }

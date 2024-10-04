@@ -8,10 +8,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.annotation.Repeatable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import static nate.company.youtube_converter.siteTools.VideoParsing.startingPointForDownload;
 
 /* cette
 partie a été écrite manuellement il faut tjrs se référer à la page
@@ -68,13 +74,19 @@ public class VideoController {
      * but to keep it simple we didnt did it here but you can find how in the baledung page
      * at "Spring boot validation" click link.
      * Elle est liée à la méthode "save" de vide-dlservice.service.ts
-     * d'où le fait qu'elle appelle save
+     * d'où le fait qu'elle est de la form @PostMapping("/videos")
+     * le "Post" de "PostMapping" est associé au "post" de this.http.post<Video>
+     * le "/videos" est associé au "localhost:8080/videos" qui correspond au premier argument du post
+     * de https.post<Video>
      * @param video
      */
     @PostMapping("/videos")
-    public void addVideo(@RequestBody Video video){
+    public Video addVideo(@RequestBody Video video){
         System.out.println(" on ajoute la vidéo : "+video);
-        videoRepository.save(video);
+        //necessary to retrieve the actual id of the video for the
+        // request on database
+        var actualVideo = videoRepository.save(video);
+        return actualVideo;
     }
 
 
@@ -88,13 +100,21 @@ public class VideoController {
      * at "Spring boot validation" click link.
      * Elle est liée à la méthode "save" de vide-dlservice.service.ts
      * d'où le fait qu'elle appelle save
+     * C'est fonctionnel du pdv de postman
      * @param video
      */
-    @PostMapping("/videos")
-    public ResponseEntity<String> downloadVideo(@RequestBody Video video){
-        System.out.println(" on télécharge la vidéo : "+video);
+    //fonctionne via postman
+    @GetMapping("/videos/download")
+    public String downloadVideo(@RequestBody Video video){
+        System.out.println("on télécharge la vidéo avec l'id : "+video.getId());
+        //remplacer l'id de videoName par le title qui sera récupéré
+        var videoInDb = videoRepository.findById(video.getId());
+        //par l'API Python
+        var videosLink = new String[1];
+        videosLink[0] = video.getLink();
+        startingPointForDownload(videosLink);
         var videoName = "backOn";
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(videoName);
+        return videoName;
 
     }
 
@@ -137,15 +157,5 @@ public class VideoController {
          */
         return ResponseEntity.noContent().build();
     }
-
-    /*
-    @DeleteMapping("/users/{id}")
-    void removeUser(@RequestBody User user){
-        //var userIdLong = Long.parseLong(user.getId());
-        var userIdLong = user.getId();
-        System.out.println("on supprime le user avec l'id : "+userIdLong);
-        userRepository.delete(user);
-    }*/
-
 
 }

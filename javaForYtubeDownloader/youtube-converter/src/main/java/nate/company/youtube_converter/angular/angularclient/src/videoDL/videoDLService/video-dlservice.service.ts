@@ -9,12 +9,20 @@ import { Video } from '../video';
 export class VideoDLServiceService {
 
   private videosUrl: string;
+  private videoChosenForDL:string = '';
 
     constructor(private http: HttpClient) {
       //url toward the link to the backend
       // associated to videos database page
       this.videosUrl = 'http://localhost:8080/videos';
     }
+
+  /**
+  This method enables to prepare a new video link for a download
+  */
+    ajoutVideoDL(videoName:string){
+      this.videoChosenForDL = videoName;
+   }
 
     /**
      retrive all the videos downloaded so far by every users
@@ -35,6 +43,14 @@ export class VideoDLServiceService {
       console.log("On sauvegarde une nouvelle vidéo : "+video);
       return this.http.post<Video>(this.videosUrl, video);
     }
+
+  /**
+   this video does the video preparation on the server part.
+   */
+  public prepareVideo(video: Video) {
+        console.log("On télécharge une nouvelle vidéo : "+video+ " en préparation, il faut modifier videoDL-Form et videodlservice...");
+        //return this.http.post<Video>(this.videosUrl, video);
+  }
 
   /**
    cette méthode permet la suppresion d'un user.

@@ -13,6 +13,8 @@ export class VideoDLFormComponent implements OnInit {
   router:Router;
   videoService:VideoDLServiceService;
   video:Video;
+  //loading video
+  videoLoading:boolean=false;
 
   /*
   emiter that will enable to send the urlLink to the father (app.component)
@@ -43,6 +45,8 @@ export class VideoDLFormComponent implements OnInit {
   prépare la page de téléchargement + enregistre la vidéo en base
   */
   dlNewVideo(){
+    //beginning of loading
+    this.videoLoading = true;
     //save the video link + its id (il faudra changer par sauvegarde or update)
     this.videoService.save(this.video).subscribe(actualVideoWithTrueID =>
         //this.stayHere()
@@ -69,6 +73,8 @@ export class VideoDLFormComponent implements OnInit {
                         the downlaod link is ready , just go to the downloadPage to enable it
                         (mayba later could retrieve the path for the download Link)
                         */
+                        //end of loading
+                        this.videoLoading=false;
                         this.goToDownloadPage();
                     }
             );

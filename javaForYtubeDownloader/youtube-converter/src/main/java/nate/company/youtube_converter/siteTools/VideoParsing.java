@@ -1,18 +1,21 @@
 package nate.company.youtube_converter.siteTools;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public class VideoParsing {
 
     /*
 
-       USEFUL for java
+       USEFUL for java you may transform the methos used as simple class in order to add
+       "multi threading" support for multi-user trying to download
+
      */
 
 
+    private static Logger logger = Logger.getLogger(VideoParsing.class.getName());
+    public static String logFilePath = "VideoConverterPersonalFiles/journal_de_bord";
 
 
 
@@ -157,11 +160,100 @@ public class VideoParsing {
         launchCommandWithOutput(strBuilder.toString(), true);
 
         //need to retrieve the path with the fileName and return it for downloadLink in frontend
+        //maybe I can write it in a specific .txt file, and parse it to retrieve. It would be a way
+        // of interacting java with python
+
+    }
+
+    /**
+     *
+     * this method retrieve a video name on the directory based on its
+     * youtube url.
+     *
+     * @param videoLink
+     * the link for the video you're interested in.
+     *
+     * @return
+     *
+     * the new path where the file is in.
+     */
+    public static String retrieveVideoFileName(String videoLink){
+        Objects.requireNonNull(videoLink);
+        RandomAccessFile logBookFile;
+        //retrive position in desktop
+        var logBookPathPrecise = fileAbsolutePathPositionWithBeginning(logFilePath);
+
+        /* retrieve log file*/
+        try {
+            logBookFile = new RandomAccessFile(logBookPathPrecise, "r");
+        } catch (FileNotFoundException e) {
+            throw new AssertionError("Path for logbook, is wrong");
+        }
+
+        /*can be improved by using user's name to look for their first occurence + can use a hashMap. in order to keep.
+        file's position in the hierarchy (not sure cause the data are written by python, not java...).
+        may use the same method as scala tp3 : each file is written on a fixed number of character, let's
+        say 150. If one file is under this amount, you just add padding that will be overlooked later.
+         */
+        int maxLinkFileSize = 150;
+        byte[] bytesForFileReader = new byte[maxLinkFileSize];
+
+        String videoEncoded;
+        /*
+        read the byte for the file
+         */
+        var linkIsFound = false;
+
+        String videoName = null;
+        do {
+            try {
+                var endOfFile = logBookFile.read(bytesForFileReader);
+                //retrive the string read
+
+                videoEncoded = new String(bytesForFileReader);
+                var LinkIsFound = false;
+
+                //video found
+                if(videoEncoded.contains(videoLink)){
+                    linkIsFound = true;
+                    //retrieve only the title of the video
+                    var videoAndName = videoEncoded.split("::");
+
+                    //remove offset element
+                    videoName = videoAndName[1].split("\\*")[0];
+                }
+
+                // file not found but end of file
+                if(endOfFile == -1 && !linkIsFound) {
+                    logger.info("Vidéo non trouvée parmi les vidéos téléchargées du log");
+                    break;
+                }
+            } catch (IOException e) {
+                throw new AssertionError("lack of bytes to read by byteReader");
+            }
+        }while(!linkIsFound);
+
+        if(videoName != null) {
+
+            logger.info("Vidéo trouvée parmi les vidéos téléchargées du log : "+videoName);
+            return videoName;
+
+        }
+
+        logger.info("Vidéo non trouvée parmi les vidéos téléchargées du log");
+        return "NomParDefautFichierNonTrouve.mp3";
+
 
     }
 
     public static void startingPointForDownload(String[] args) {
         var filePath = fileAbsolutePathPositionWithBeginning("VideoConverter/python_script_download/yDownloaderForJava.py");
         launchFile(filePath, args);
+//        System.out.println("La vidéo retrouvée a un fichier qui s'intitule :"+retrieveVideoFileName(
+//                "https://www.youtube.com/watch?v=sML_1FMTn6c"));
+    }
+
+    public static void main(String args[]){
+        var filePath = retrieveVideoFileName("https://www.youtube.com/watch?v=sML_1FMTn6c");
     }
 }

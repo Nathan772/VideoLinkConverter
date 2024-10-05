@@ -77,7 +77,7 @@ public class User {
     /**
      * a setter on the user's id
      */
-    public void setId(){
+    public void setId(Long id){
          this.id = id;
     }
 

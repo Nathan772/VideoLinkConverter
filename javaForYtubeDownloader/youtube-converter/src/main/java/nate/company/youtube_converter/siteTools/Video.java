@@ -31,6 +31,7 @@ public class Video {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String link;
+    private String title;
 
     /**
      *
@@ -40,15 +41,17 @@ public class Video {
 
     public Video(){
         this.link = "";
+        this.title= "";
     }
 
     /*
     Pour faire fonctionner l'API il faut au minimum :
     le constructeur standard, les getters, les setters, et toString
      */
-    public Video(String link){
+    public Video(String link, String title){
         Objects.requireNonNull(link, "the link for the video name cannot be null");
         this.link = link;
+        this.title = title;
     }
 
     /**
@@ -63,17 +66,33 @@ public class Video {
     /**
      * a getter on the user's id.
      * @return
-     * the id of the user
+     * the id of the video
      */
     public long getId(){
         return id;
     }
 
     /**
+     * a getter on the Video title
+     * @return
+     * the title of the video.
+     */
+    public String getTitle(){
+        return title;
+    }
+
+    /**
      * a setter on the user's id
      */
-    public void setId(){
+    public void setId(Long id){
         this.id = id;
+    }
+
+    /**
+     * a setter on the video title
+     */
+    public void setTitle(String title){
+        this.title = title;
     }
 
 
@@ -89,7 +108,7 @@ public class Video {
 
     @Override
     public String toString(){
-        return "Vidéo numéro : "+id+ ", lien : "+link;
+        return "Vidéo numéro : "+id+ ", lien : "+link+ "le titre : "+title;
     }
 
 

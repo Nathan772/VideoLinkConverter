@@ -1,5 +1,16 @@
 #!/usr/bin/env python3
 
+
+
+
+
+"""
+
+Il faudrait ajouter du multi-threading pour compléter et rendre ça plus pertinent
+
+"""
+
+
 import shlex
 #from pytube import YouTube
 import subprocess
@@ -139,8 +150,14 @@ def startDownload(listeLiensVideos:list,newTitleOn:bool=False, choixFormatFichie
 
 
     mp3Path = findFileWithPath("VideoConverterPersonalFiles/MP3_output")
+
     mp4Path = findFileWithPath("VideoConverterPersonalFiles/MP4_output")
-    #downloadMP4(fichier, newTitle, Mp3_outputPath:str="VideoConverterPersonalFiles/MP3_output",Mp4_outputPath:str="VideoConverterPersonalFiles/MP4_output")
+
+    #journal des vidéos analysées
+
+    journal_de_bord_path_file = findFileWithPath("VideoConverterPersonalFiles/journal_de_bord")
+    
+    file_journal = open(journal_de_bord_path_file, "a")
 
     os.chdir(pathFileForProject)
     if(len(listeLiensVideos) == 0): #pas de vidéos à traiter
@@ -150,15 +167,23 @@ def startDownload(listeLiensVideos:list,newTitleOn:bool=False, choixFormatFichie
 
     if(choixFormatFichier == 2):
         print("Le dossier pour vos fichiers mp3 est : "+mp4Path)
-        for fichier in listeLiensVideos:
+        for lienVideo in listeLiensVideos:
             #print("les liens vidéos à traiter : "+el)
-            downloadMP4(fichier, newTitleOn, mp4Path)
-
+            nom_output_file = downloadMP4(lienVideo, newTitleOn, mp4Path)
+            #ajoute le fichier dans le journal de bord pour java
+            file_journal.write(lienVideo+"::"+nom_output_file+(150-(len(lienVideo)+len(nom_output_file)+3))*"*"+";")
+            
     elif(choixFormatFichier == 1):
         print("Le dossier pour vos fichiers mp3 est : "+mp3Path)
-        for fichier in listeLiensVideos:
+        for lienVideo in listeLiensVideos:
             #print("les liens vidéos à traiter : "+el)
-            downloadMP3(fichier, newTitleOn, mp3Path)
+            nom_output_file = downloadMP3(lienVideo, newTitleOn, mp3Path)
+            #ajoute le fichier dans le journal de bord, pour java
+            file_journal.write(lienVideo+"::"+nom_output_file+(150-(len(lienVideo)+len(nom_output_file)+3))*"*"+";")
+
+    #fermeture du journal
+    file_journal.close()
+
 
 #ajouter une fonctionnalité de mutli-threading pour permettre le multi-téléchargement et autoriser l'utilisation d'une liste 
 #d'argument et montrer d'autres compétences

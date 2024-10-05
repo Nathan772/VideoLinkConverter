@@ -1,8 +1,5 @@
 package nate.company.youtube_converter.controller;
-import nate.company.youtube_converter.siteTools.User;
-import nate.company.youtube_converter.siteTools.UserRepository;
-import nate.company.youtube_converter.siteTools.Video;
-import nate.company.youtube_converter.siteTools.VideoRepository;
+import nate.company.youtube_converter.siteTools.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -143,15 +140,30 @@ public class VideoController {
         System.out.println("on télécharge la vidéo avec l'id : "+video.getId());
         //remplacer l'id de videoName par le title qui sera récupéré
         //save works just like update if the entity already existe with this
-        // id
-        video.setTitle("Back on Wesh");
-        //update pour préciser le titre de la vidéo !
-        //save est équivalent à update, il met à jour si un objet existe déjà avec cet id
-        videoRepository.save(video);
+
         /* préparation du fichier avec l'API Python */
+
+
         var videosLink = new String[1];
         videosLink[0] = video.getLink();
+
+        //download
         startingPointForDownload(videosLink);
+
+        //retrieve file's downloaded name on desktop
+
+        var videoActualTitle = VideoParsing.retrieveVideoFileName(video.getLink());
+
+        /* update video title (begin) */
+
+        video.setTitle(videoActualTitle);
+
+        //save est équivalent à update, il met à jour si un objet existe déjà avec cet id
+        videoRepository.save(video);
+
+        /* update video title (end) */
+
+
         return video;
 
     }

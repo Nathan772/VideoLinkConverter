@@ -34,7 +34,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": ["src/videoDL/videoDLForm/video-dl-form.component.js"]
           },
           "configurations": {
             "production": {

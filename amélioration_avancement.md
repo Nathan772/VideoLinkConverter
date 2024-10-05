@@ -7,3 +7,6 @@ Ajout à faire :
 - ajouter du contrôle et une page d'erreur, notamment si le le lien youtube est un faux lien qui n'existe pas.
 - checker les erreurs au plutôt dès que ça arrive la première fois dans java, avant d'ajouter en base de données
 ,ou alors supprimer de la base si on peut vérifier plus tôt.
+-ajouter une barre lors de l'ajout des données en base
+- faire tourner le cercle du chargement n fois tant que le chargement n'est pas fini
+ (videoLoading == true)

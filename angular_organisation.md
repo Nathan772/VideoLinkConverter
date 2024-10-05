@@ -220,3 +220,12 @@ ng generate service videoDLService
 
 ng generate component videoDLPage
 
+
+Pour utiliser des fichiers javascript dans angular projet,
+il faut ajouter dans le fichier angular.json le path vers 
+le fichier javascript, dans la partie "scripts": [].
+
+Il faut le faire pour chaque fichier script, nouveau.
+voir : https://medium.com/@Codeible/adding-loading-and-using-javascript-in-angular-3281ea4b056b
+
+pour plus de détails

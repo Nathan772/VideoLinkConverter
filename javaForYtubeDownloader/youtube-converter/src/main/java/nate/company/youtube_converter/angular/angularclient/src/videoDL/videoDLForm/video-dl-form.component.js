@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
                           /*
                           period of time betweeen two calls, even though the previous is not finished yet.
                           */
-                          let repeat = 500;
+                          let repeat = 10;
 
 
                             //peut être qu'un progressTimer n'est pas réutilisable
@@ -61,13 +61,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
                                   /*for(let i = 0;i<50;i++){
                                     ;
-                                    progressValue++;*/
+                                    progressStartValue++;*/
                                     progressStartValue++;
                                     console.log("la valeur de progressStart value "+progressStartValue);
                                     if (progressStartValue == progressStartEnd) {
                                       // this part allow to stop definitly the lambda call (nop??)
                                       clearInterval(progressTimer)
-                                      console.log("la valeur de progress value : "+progressValue)
+                                      console.log("la valeur de progress value : "+progressStartValue)
                                       //come back to the beginning
                                       //until everything is loaded (here everything is loaded is represented
                                       //by the compteur
@@ -86,9 +86,9 @@ window.addEventListener('DOMContentLoaded', () => {
                                                                   //conic-gradient("#FFFFFF" ${3.6 * progressStartValue}deg, #fff 0deg)`;
                                     /*
                                     bloque l'affichage de la barre à une faible valeur*/
-                                    /*if(progressValue >= 80){
+                                    if(progressStartValue >= 80){
                                       progressStartValue=0;
-                                    }*/
+                                    }
                                   //} //linked to for (deprecated
 
                                      //}

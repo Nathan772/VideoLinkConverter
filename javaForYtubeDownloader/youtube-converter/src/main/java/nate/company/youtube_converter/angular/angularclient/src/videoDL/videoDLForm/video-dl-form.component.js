@@ -16,8 +16,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 var container = document.getElementById('container');
                 //alert(container);
-                console.log("élément récupéré : "+container)
-                console.log("début du chargement !");
+                //console.log("élément récupéré : "+container)
+                //console.log("début du chargement !");
 
                 /* C'est color qui gère la couleur du cercle de chargement de vidéo
                 percent indique le moment d'arrêt
@@ -58,16 +58,16 @@ window.addEventListener('DOMContentLoaded', () => {
                               () => {
 
 
-
+                                  //console.log("on entre dans progresse timer");
                                   /*for(let i = 0;i<50;i++){
                                     ;
                                     progressStartValue++;*/
                                     progressStartValue++;
-                                    console.log("la valeur de progressStart value "+progressStartValue);
+                                    //console.log("la valeur de progressStart est : "+progressStartValue);
                                     if (progressStartValue == progressStartEnd) {
                                       // this part allow to stop definitly the lambda call (nop??)
                                       clearInterval(progressTimer)
-                                      console.log("la valeur de progress value : "+progressStartValue)
+                                      //console.log("la valeur de progress value : "+progressStartValue)
                                       //come back to the beginning
                                       //until everything is loaded (here everything is loaded is represented
                                       //by the compteur
@@ -101,8 +101,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-                        //kill definitly the loading
-                        setTimeout(() => { clearInterval(progressTimer); alert('stop')}, 5000);
+                        //kill definitly the loading after 5 minutes, even if it's not finished
+
+                        setTimeout(() => { clearInterval(progressTimer); alert('stop')}, 300000);
 
 
                         });

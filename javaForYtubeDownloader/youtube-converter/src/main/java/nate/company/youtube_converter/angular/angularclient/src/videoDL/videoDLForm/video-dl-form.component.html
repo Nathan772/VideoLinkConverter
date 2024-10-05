@@ -69,16 +69,26 @@ https://jsfiddle.net/kimmobrunfeldt/72tkyn40/
               </div>
             </div>
           </div>-->
+      <!-- here
+      to be catched
+      to prevent from error -->
 
-        <div id="container"></div>
+
+      <!-- <div *ngIf="this.videoLoading">
+
+      -->
+
       <div class="progress-group">
+        <div id="container"></div>
         <div class="circular-progress" >
         </div>
+        <span *ngIf="this.videoLoading">
         <p class="text" style="color:#DC143C">Chargement en cours...</p>
-
+        </span>
       </div>
         <script src="video-dl-form.component.js"></script>
 
+      <!--</div>-->
       <!-- </div>-->
 
 

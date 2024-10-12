@@ -2,6 +2,8 @@ package nate.company.youtube_converter.siteTools;
 
 import java.io.*;
 import java.util.Objects;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Logger;
 
 public class VideoParsing {
@@ -15,7 +17,19 @@ public class VideoParsing {
 
 
     private static Logger logger = Logger.getLogger(VideoParsing.class.getName());
-    public static String logFilePath = "VideoConverterPersonalFiles/journal_de_bord";
+    Handler fileHandler;
+
+    //retrieve the log file
+    {
+        try {
+            fileHandler = new FileHandler("logVideoParsing.txt");
+        } catch (IOException e) {
+            throw new AssertionError("The log file doesn't exist");
+        }
+    }
+
+    public static String logFilePath = "VideoConverter/outputfiles/journal_de_bord.txt";
+
 
 
 
@@ -175,7 +189,7 @@ public class VideoParsing {
      *
      * @return
      *
-     * the new path where the file is in.
+     * the new name of the video associated to the video Link.
      */
     public static String retrieveVideoFileName(String videoLink){
         Objects.requireNonNull(videoLink);
@@ -187,15 +201,19 @@ public class VideoParsing {
         try {
             logBookFile = new RandomAccessFile(logBookPathPrecise, "r");
         } catch (FileNotFoundException e) {
+            System.out.println("le fichier de log est introuvable");
             throw new AssertionError("Path for logbook, is wrong");
         }
+        System.out.println(" le fichier de log a été trouvé ! ");
 
         /*can be improved by using user's name to look for their first occurence + can use a hashMap. in order to keep.
         file's position in the hierarchy (not sure cause the data are written by python, not java...).
         may use the same method as scala tp3 : each file is written on a fixed number of character, let's
-        say 150. If one file is under this amount, you just add padding that will be overlooked later.
+        say 400. If one file is under this amount, you just add padding that will be overlooked later.
+        Padding is represented by "*" symbole.
+        Warning: it has to match with the python value in the function "startSave()"
          */
-        int maxLinkFileSize = 150;
+        int maxLinkFileSize = 400;
         byte[] bytesForFileReader = new byte[maxLinkFileSize];
 
         String videoEncoded;
@@ -207,6 +225,7 @@ public class VideoParsing {
         String videoName = null;
         do {
             try {
+                System.out.println(" on lit le fichier ...");
                 var endOfFile = logBookFile.read(bytesForFileReader);
                 //retrive the string read
 
@@ -222,9 +241,13 @@ public class VideoParsing {
                     //remove offset element
                     videoName = videoAndName[1].split("\\*")[0];
                 }
+                else{
+                    System.out.println("la chaine lue contient : "+videoEncoded);
+                }
 
                 // file not found but end of file
                 if(endOfFile == -1 && !linkIsFound) {
+                    System.out.println(" vidéo non trouvée parmi les vidéos analysées par le script python");
                     logger.info("Vidéo non trouvée parmi les vidéos téléchargées du log");
                     break;
                 }
@@ -241,6 +264,7 @@ public class VideoParsing {
         }
 
         logger.info("Vidéo non trouvée parmi les vidéos téléchargées du log");
+        System.out.println(" vidéo non trouvée parmi les vidéos du log");
         return "NomParDefautFichierNonTrouve.mp3";
 
 

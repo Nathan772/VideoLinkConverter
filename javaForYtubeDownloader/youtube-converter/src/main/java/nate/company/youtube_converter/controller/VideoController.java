@@ -65,7 +65,7 @@ public class VideoController {
     }
 
     /**
-     * the addVideo add a new video in the data based, when this one
+     * this method enable to add a new video in the data based, when this one
      * is passed through the request body
      * normally we would need to add controller implementation, in order to check if user data is validate or not
      * but to keep it simple we didnt did it here but you can find how in the baledung page
@@ -82,8 +82,44 @@ public class VideoController {
         System.out.println(" on ajoute la vidéo : "+video);
         //necessary to retrieve the actual id of the video for the
         // request on database
-        var actualVideo = videoRepository.save(video);
-        return actualVideo;
+
+        //needs two actions to retrieve the actual name of the video does it ???
+
+        //var actualVideo = videoRepository.save(video);
+
+        System.out.println("on récupère la vidéo avec l'id : "+video.getId());
+        //remplacer l'id de videoName par le title qui sera récupéré
+        //save works just like update if the entity already existe with this
+
+        /* préparation du fichier avec l'API Python */
+
+        var videosLink = new String[1];
+        videosLink[0] = video.getLink();
+
+        //download
+        startingPointForDownload(videosLink);
+
+        //retrieve file's downloaded name on desktop
+
+        var videoActualTitle = VideoParsing.retrieveVideoFileName(video.getLink());
+
+        //video not found
+        if(videoActualTitle == null){
+            System.out.println(" video searched for its title, not found ");
+            return video;
+        }
+
+        /* update video title (begin) */
+
+        video.setTitle(videoActualTitle);
+
+        //save est équivalent à update, il met à jour si un objet existe déjà avec cet id
+        videoRepository.save(video);
+
+        /* update video title (end) */
+
+
+        return video;
     }
 
 
@@ -124,7 +160,7 @@ public class VideoController {
 
     }*/
 
-    /**
+    /*
      * the addVideo add a new video in the data based, when this one
      * is passed through the request body
      * normally we would need to add controller implementation, in order to check if user data is validate or not
@@ -133,40 +169,48 @@ public class VideoController {
      * Elle est liée à la méthode "save" de vide-dlservice.service.ts
      * d'où le fait qu'elle appelle save
      * C'est fonctionnel du pdv de postman
+     *
+     * change "/videos/download" to "/videos/title"
      * @param video
      */
-    @PostMapping("/videos/download")
-    public Video downloadVideo(@RequestBody Video video){
-        System.out.println("on télécharge la vidéo avec l'id : "+video.getId());
-        //remplacer l'id de videoName par le title qui sera récupéré
-        //save works just like update if the entity already existe with this
+ //   @PostMapping("/videos/broadacast/title")
+ //   public Video broadcastVideo(@RequestBody Video video){
+//        System.out.println("on récupère la vidéo avec l'id : "+video.getId());
+//        //remplacer l'id de videoName par le title qui sera récupéré
+//        //save works just like update if the entity already existe with this
+//
+//        /* préparation du fichier avec l'API Python */
+//
+//
+//        var videosLink = new String[1];
+//        videosLink[0] = video.getLink();
+//
+//        //download
+//        startingPointForDownload(videosLink);
+//
+//        //retrieve file's downloaded name on desktop
+//
+//        var videoActualTitle = VideoParsing.retrieveVideoFileName(video.getLink());
+//
+//        //video not found
+//        if(videoActualTitle == null){
+//            System.out.println(" video searched for its title, not found ");
+//            return video;
+//        }
+//
+//        /* update video title (begin) */
+//
+//        video.setTitle(videoActualTitle);
+//
+//        //save est équivalent à update, il met à jour si un objet existe déjà avec cet id
+//        videoRepository.save(video);
+//
+//        /* update video title (end) */
+//
+//
+//        return video;
 
-        /* préparation du fichier avec l'API Python */
-
-
-        var videosLink = new String[1];
-        videosLink[0] = video.getLink();
-
-        //download
-        startingPointForDownload(videosLink);
-
-        //retrieve file's downloaded name on desktop
-
-        var videoActualTitle = VideoParsing.retrieveVideoFileName(video.getLink());
-
-        /* update video title (begin) */
-
-        video.setTitle(videoActualTitle);
-
-        //save est équivalent à update, il met à jour si un objet existe déjà avec cet id
-        videoRepository.save(video);
-
-        /* update video title (end) */
-
-
-        return video;
-
-    }
+//    }
 
 
 
@@ -197,7 +241,7 @@ public class VideoController {
     public ResponseEntity<String> removeVideo(@PathVariable String id){
         var videoIdLong = Long.parseLong(id);
         //var userIdLong = user.getId();
-        System.out.println("on supprime le user avec l'id : "+videoIdLong);
+        System.out.println("on supprime la musique avec l'id : "+videoIdLong);
         videoRepository.deleteById(videoIdLong);
         /* renvoyer un élément
         est indispensable et est nécessaire, sinon

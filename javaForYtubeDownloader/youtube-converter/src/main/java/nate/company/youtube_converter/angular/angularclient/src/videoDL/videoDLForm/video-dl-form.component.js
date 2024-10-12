@@ -103,7 +103,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                         //kill definitly the loading after 5 minutes, even if it's not finished
 
-                        setTimeout(() => { clearInterval(progressTimer); alert('stop')}, 300000);
+                        setTimeout(() => { clearInterval(progressTimer); alert('stop')}, 100000);
 
 
                         });

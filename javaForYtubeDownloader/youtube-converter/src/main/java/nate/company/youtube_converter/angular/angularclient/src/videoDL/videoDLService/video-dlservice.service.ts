@@ -56,11 +56,13 @@ export class VideoDLServiceService {
    notice : you can only retrieve as observable-compatible
    something that is defined as a controller and repository in java
    */
+   /*
+   deprecated
   public prepareVideo(video: Video): Observable<Video>{
-        console.log("On télécharge une nouvelle vidéo : "+video);
+        console.log("On récupère le titre d'une nouvelle vidéo : "+video);
         //replace by get to display video's name
-        return this.http.post<Video>(this.videosUrl+"/download",video);
-  }
+        return this.http.post<Video>(this.videosUrl+"/title",video);
+  }*/
 
   /**
    cette méthode permet la suppresion d'un user.

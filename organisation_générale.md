@@ -2,7 +2,7 @@ Pour angular :
 
 
 lancer le projet :
-
+0) lancer le fichier Application.java depuis intellij
 1) il faut se placer dans angularclient
 2) tapez : ng serve --open
 
@@ -226,6 +226,27 @@ il faut ajouter dans le fichier angular.json le path vers
 le fichier javascript, dans la partie "scripts": [].
 
 Il faut le faire pour chaque fichier script, nouveau.
+
 voir : https://medium.com/@Codeible/adding-loading-and-using-javascript-in-angular-3281ea4b056b
 
 pour plus de détails
+
+
+
+Pour lancer le swagger : 
+
+- lancer le fichier application.java 
+
+- se rendre sur la page : http://localhost:8080/swagger-ui/index.html
+
+- n'oubliez pas les dépendances : 
+
+```xml
+
+<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.3.0</version>
+</dependency
+
+```

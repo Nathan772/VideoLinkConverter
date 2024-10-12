@@ -36,7 +36,8 @@ based on their information.
     this.videoService.delete(video).subscribe(data => {
       console.log(video+" a été supprimé ! ");
       })
-    //recharge la page après suppression
+
+    //recharge la page après suppression (useless ??)
     window.location.reload();
   }
 

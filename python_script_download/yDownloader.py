@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 
 
-
-
-
 """
 
 Il faudrait ajouter du multi-threading pour compléter et rendre ça plus pertinent
@@ -31,29 +28,16 @@ from pytubefix.cli import on_progress
 # référence:  https://www.freecodecamp.org/news/python-program-to-download-youtube-videos/
 
 
-#créer un fichier à inclure qui gère entièrement la transformation d'un fichier mp3 en fichier mp4 et ensuite appeler
-# une méthode de ce fichier dans downloadMP3
-# download MP3 appel downloadMP4 puis appel ce fichier à inclure sur le fichier puis supprime le fichier au format mp4
-def downloadMP3(link, newTitleOn:bool=False, Mp3_outputPath:str="/home/nathanb/Bureau/Bureau/Bureau/Perso/projets_développement_informatique/VideoConverterPersonalFiles/MP3_output"):
+"""
+Cette méthode permet de récupérer le titre de la vidéo que vous souhaitez
+ajouter à votre historique de fichier mp3 youtube.
+"""
+def historiqueVideo(link):
     try:
 
         #from ytubefix official manual
         yt = YouTube(link, on_progress_callback = on_progress)
         newTitle = yt.title
-        ys = yt.streams.get_audio_only()
-        ys.download(mp3=True)
-
-        #update du titre de l'audio si nécessaire
-        if(newTitleOn):
-            newTitle = updateFileTitle(yt.title+".mp3", ".mp3")
-            print("titre mis à jour")
-
-        #on garde l'ancien titre
-        else:
-            newTitle = newTitle+".mp3"
-            print("on garde le titre par défaut")
-        
-        subprocess.call(["mv",newTitle,Mp3_outputPath])
 
         #on renvoie le nouveau titre du fichier sans le path
         return newTitle
@@ -90,37 +74,6 @@ def findFileWithPath(pathBegin:str):
     actualStrForPath = pathSearchedInBytes.decode('utf-8').rstrip()
     #print("le path est : "+actualStrForPath)
     return actualStrForPath
-
-
-def downloadMP4(link:str, newTitleOn:bool=False, pathForMp4output:str="/home/nathanb/Bureau/Bureau/Bureau/Perso/projets_développement_informatique/VideoConverterPersonalFiles/MP4_output"):
-    youtubeObject = YouTube(link, on_progress_callback = on_progress)
-    youtubeObject = youtubeObject.streams.get_highest_resolution()
-    try:
-        #se déplace vers le dossier pour les fichiers MP4
-        youtubeObject.download()
-        print("Download MP4 is completed successfully \n")
-        newTitle = youtubeObject.title
-        print("Le titre de la vidéo MP4 est : "+newTitle)
-        if(newTitleOn):
-            newTitle = updateFileTitle(youtubeObject.title+".mp4", ".mp4")
-            print("titre mis à jour")
-        else:
-            newTitle = newTitle+".mp4"
-            print("on garde le titre par défaut")
-
-        #déplace le fichier dans le bon dossier
-            
-        MP4_outputPath = pathForMp4output
-        print("le new title est : "+newTitle+"\n\n")
-        print("le dossier pour votre fichier MP4 EST : "+MP4_outputPath+"\n")
-        #subprocess.call(["pwd"])
-        subprocess.call(["mv",newTitle,MP4_outputPath])
-
-        #on renvoie le nouveau titre du fichier sans le path
-        return newTitle
-    except Exception as e:
-        exception_type, exception_object, exception_traceback = sys.exc_info()
-        traceback.print_tb(exception_traceback, limit=2, file=sys.stdout)
     
 
 
@@ -144,42 +97,35 @@ def newTitleChoice():
 
 #cette méthode démarre le téléchargement des fichiers en demandant 
 #à l'utilisateur son choix de format
-def startDownload(listeLiensVideos:list,newTitleOn:bool=False, choixFormatFichier:int=0):
+def startSave(listeLiensVideos:list):
     #go to project directory
     pathFileForProject = findFileWithPath("VideoConverter/python_script_download")
+    #mp3Path = findFileWithPath("VideoConverterPersonalFiles/MP3_output")
+    #mp4Path = findFileWithPath("VideoConverterPersonalFiles/MP4_output")
+    #this value has to match with the number chosen in the java file VideoParsing.java in "retrieveVideoFileName"
+    #otherwise it will cause trouble while parsing in the java file
+    maxLinkFileSize = 400
 
-
-    mp3Path = findFileWithPath("VideoConverterPersonalFiles/MP3_output")
-
-    mp4Path = findFileWithPath("VideoConverterPersonalFiles/MP4_output")
-
-    #journal des vidéos analysées
-
-    journal_de_bord_path_file = findFileWithPath("VideoConverterPersonalFiles/journal_de_bord")
+    #journal des vidéos pour le java
+    journal_de_bord_path_file = findFileWithPath("VideoConverter/outputfiles/journal_de_bord.txt")
     
     file_journal = open(journal_de_bord_path_file, "a")
 
     os.chdir(pathFileForProject)
     if(len(listeLiensVideos) == 0): #pas de vidéos à traiter
         return
-    while(choixFormatFichier != 1 and choixFormatFichier != 2):
-        choixFormatFichier = int(input("Voulez-vous convertir en un fichier mp3 (1) ou mp4 (2)? : \n"))
+    # while(choixFormatFichier != 1 and choixFormatFichier != 2):
+    #     choixFormatFichier = int(input("Voulez-vous convertir en un fichier mp3 (1) ou mp4 (2)? : \n"))
 
-    if(choixFormatFichier == 2):
-        print("Le dossier pour vos fichiers mp3 est : "+mp4Path)
-        for lienVideo in listeLiensVideos:
-            #print("les liens vidéos à traiter : "+el)
-            nom_output_file = downloadMP4(lienVideo, newTitleOn, mp4Path)
-            #ajoute le fichier dans le journal de bord pour java
-            file_journal.write(lienVideo+"::"+nom_output_file+(150-(len(lienVideo)+len(nom_output_file)+3))*"*"+";")
-            
-    elif(choixFormatFichier == 1):
-        print("Le dossier pour vos fichiers mp3 est : "+mp3Path)
-        for lienVideo in listeLiensVideos:
-            #print("les liens vidéos à traiter : "+el)
-            nom_output_file = downloadMP3(lienVideo, newTitleOn, mp3Path)
-            #ajoute le fichier dans le journal de bord, pour java
-            file_journal.write(lienVideo+"::"+nom_output_file+(150-(len(lienVideo)+len(nom_output_file)+3))*"*"+";")
+
+    for lienVideo in listeLiensVideos:
+        #print("les liens vidéos à traiter : "+el)
+        nom_output_file = historiqueVideo(lienVideo)
+        #ajoute le fichier dans le journal de bord pour java
+        #il y a aussi du padding au cas où le nom de la vidéo est trop long (typiquement les vidéos japonaises)
+        #la taille du lien youtube + nom vidéo doit être <= 400
+        file_journal.write(lienVideo+"::"+nom_output_file+(maxLinkFileSize-(len(lienVideo)+len(nom_output_file)+3))*"*"+";\n")
+
 
     #fermeture du journal
     file_journal.close()
@@ -187,21 +133,22 @@ def startDownload(listeLiensVideos:list,newTitleOn:bool=False, choixFormatFichie
 
 #ajouter une fonctionnalité de mutli-threading pour permettre le multi-téléchargement et autoriser l'utilisation d'une liste 
 #d'argument et montrer d'autres compétences
-def main():
-    args = sys.argv[1:]
+def main(argv):
+    args = argv
+    for el in args:
+        print(el)
     if len(args) == 0:
-        print("aucun fichier à télécharger : terminé ! \n")
+        print("aucune vidéo à récupérer : terminé ! \n")
         return
-    newTitleOn = False
 
-    print("il faut télécharger "+str(len(args))+" fichiers .\n")
-    #On propose de choisir un nouveau titre, si il n'y a pas trop de fichiers à traiter
-    #c'est à dire - de 4 
+    print("il faut récupérer "+str(len(args))+" liens vidéos .\n")
+    
+    startSave(args)
 
-    if(len(args) <= 4):
-        newTitleOn = newTitleChoice()
-
-    startDownload(args, newTitleOn)
-
+"""
+remarque : ne fonctionne pas lorsqu'on prend une vidéo directement depuis une playlist, à cause du fameux
+"&index=..."
+le "&" doit poser problème et être perçu comme une addition de commande.
+"""
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])

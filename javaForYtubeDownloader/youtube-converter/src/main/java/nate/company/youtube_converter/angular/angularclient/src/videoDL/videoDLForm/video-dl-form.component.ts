@@ -56,7 +56,8 @@ export class VideoDLFormComponent implements OnInit {
           go to the downloadPage
           */
           {
-            if(actualVideoWithActualData != null)
+            //video link recognized
+            if(actualVideoWithActualData != null){
                                   /*
                                   retrieve the title of the video to display it to the user later
                                   */
@@ -75,6 +76,13 @@ export class VideoDLFormComponent implements OnInit {
                                     //end of loading
                                     this.videoLoading=false;
                                     this.goToDownloadPage();
+            }
+            //video link not recognized : reloadpage
+            else{
+              console.log("video link not recognized")
+              //this.router.relo(['videos/form']);
+              window.location.reload();
+            }
 
           }
 

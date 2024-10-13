@@ -107,7 +107,7 @@ public class VideoController {
         if(videoActualTitle == null){
             System.out.println(" video searched for its title, not found ");
             //remplacer par null
-            return video;
+            return null;
         }
 
         /* update video title (begin) */

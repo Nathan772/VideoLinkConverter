@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Objects;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class VideoParsing {
@@ -17,18 +18,22 @@ public class VideoParsing {
 
 
     private static Logger logger = Logger.getLogger(VideoParsing.class.getName());
-    Handler fileHandler;
+    private static Handler fileHandler;
 
     //retrieve the log file
     {
         try {
             fileHandler = new FileHandler("logVideoParsing.txt");
+            Logger.getLogger("").addHandler(fileHandler);
+            Logger.getLogger("nate.company.youtube_converter.logger").setLevel(Level.INFO);
         } catch (IOException e) {
             throw new AssertionError("The log file doesn't exist");
         }
     }
 
-    public static String logFilePath = "VideoConverter/outputfiles/journal_de_bord.txt";
+
+
+    public static String videoLogFilePath = "VideoConverter/outputfiles/journal_de_bord.txt";
 
 
 
@@ -170,7 +175,7 @@ public class VideoParsing {
             strBuilder.append(argument);
             strBuilder.append(" ");
         }
-        System.out.println("la commande à lancer : "+strBuilder.toString()+"\n");
+        //System.out.println("la commande à lancer : "+strBuilder.toString()+"\n");
         launchCommandWithOutput(strBuilder.toString(), true);
 
         //need to retrieve the path with the fileName and return it for downloadLink in frontend
@@ -195,13 +200,13 @@ public class VideoParsing {
         Objects.requireNonNull(videoLink);
         RandomAccessFile logBookFile;
         //retrive position in desktop
-        var logBookPathPrecise = fileAbsolutePathPositionWithBeginning(logFilePath);
+        var logBookPathPrecise = fileAbsolutePathPositionWithBeginning(videoLogFilePath);
 
         /* retrieve log file*/
         try {
             logBookFile = new RandomAccessFile(logBookPathPrecise, "r");
         } catch (FileNotFoundException e) {
-            System.out.println("le fichier de log est introuvable");
+            //System.out.println("le fichier de log est introuvable");
             throw new AssertionError("Path for logbook, is wrong");
         }
         System.out.println(" le fichier de log a été trouvé ! ");
@@ -241,13 +246,10 @@ public class VideoParsing {
                     //remove offset element
                     videoName = videoAndName[1].split("\\*")[0];
                 }
-                else{
-                    System.out.println("la chaine lue contient : "+videoEncoded);
-                }
+
 
                 // file not found but end of file
                 if(endOfFile == -1 && !linkIsFound) {
-                    System.out.println(" vidéo non trouvée parmi les vidéos analysées par le script python");
                     logger.info("Vidéo non trouvée parmi les vidéos téléchargées du log");
                     break;
                 }
@@ -264,8 +266,7 @@ public class VideoParsing {
         }
 
         logger.info("Vidéo non trouvée parmi les vidéos téléchargées du log");
-        System.out.println(" vidéo non trouvée parmi les vidéos du log");
-        return "NomParDefautFichierNonTrouve.mp3";
+        return null;
 
 
     }

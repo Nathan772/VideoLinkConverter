@@ -56,6 +56,7 @@ export class VideoDLFormComponent implements OnInit {
           go to the downloadPage
           */
           {
+            if(actualVideoWithActualData != null)
                                   /*
                                   retrieve the title of the video to display it to the user later
                                   */
@@ -68,16 +69,13 @@ export class VideoDLFormComponent implements OnInit {
                                     */
                                     this.serviceEmit.emit(this.videoService);
                                     /*
-                                    the downlaod link is ready , just go to the downloadPage to enable it
+                                    the play link is ready , just go to the downloadPage to enable it
                                     (mayba later could retrieve the path for the download Link)
                                     */
                                     //end of loading
                                     this.videoLoading=false;
                                     this.goToDownloadPage();
-            /*
-            this.videoService.prepareVideo(actualVideoWithTrueID).subscribe(video =>
 
-            );*/
           }
 
     )

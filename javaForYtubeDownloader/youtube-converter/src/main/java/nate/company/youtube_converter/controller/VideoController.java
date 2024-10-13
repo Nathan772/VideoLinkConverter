@@ -106,6 +106,7 @@ public class VideoController {
         //video not found
         if(videoActualTitle == null){
             System.out.println(" video searched for its title, not found ");
+            //remplacer par null
             return video;
         }
 
@@ -241,7 +242,7 @@ public class VideoController {
     public ResponseEntity<String> removeVideo(@PathVariable String id){
         var videoIdLong = Long.parseLong(id);
         //var userIdLong = user.getId();
-        System.out.println("on supprime la musique avec l'id : "+videoIdLong);
+        //System.out.println("on supprime la musique avec l'id : "+videoIdLong);
         videoRepository.deleteById(videoIdLong);
         /* renvoyer un élément
         est indispensable et est nécessaire, sinon

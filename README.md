@@ -24,6 +24,9 @@ cd javaForYoutubeDownloader/youtube-converter
 run the following command : 
 ng serve --open
 
+Go to the pom.xml file, right-click in the file and choose to 
+consider this file as maven project.
+
 
 
 

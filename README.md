@@ -27,7 +27,8 @@ BeanDefinitionStoreException: Failed to parse
 Go to maven menu and click on "clean" and the two arrow in circle
 "reload all maven incremental".
 Now the Application.java should work
-
+Make the "history-worl/src" file as "source" folder, with 
+right-click "mark directory as"+"source".
 
 In order to run the project, 
 

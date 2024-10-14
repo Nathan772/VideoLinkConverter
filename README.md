@@ -1,3 +1,14 @@
+# What is it about : 
+
+This project is for now just a group of page that enable to register in database 
+some youtube video links with the title of the video associated with it.
+
+# Future implementation
+
+One of the future go would be to broadcast youtube videos from the back-end, to the computer receiving. The goal would be to play videos just like spotify but by broadcasting youtube content.
+
+# How to start the project :
+
 Choose the "src" folder as the "Sources Root".
 Add the dependecies that are in the folder named : 
 "dependencies_for_VideoConverter"

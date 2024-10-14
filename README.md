@@ -7,6 +7,16 @@ If it is asked, defined them as "Jar directories".
 Go to the pom.xml file, right-click in the file and choose to 
 consider this file as maven project.
 
+If you have this error :
+
+```
+BeanDefinitionStoreException: Failed to parse
+```
+Go to maven menu and click on "clean" and the two arrow in circle
+"reload all maven incremental".
+Now the Application.java should work
+
+
 In order to run the project, 
 
 1) in a first terminal :

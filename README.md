@@ -1,7 +1,8 @@
 Choose the "src" folder as the "Sources Root".
 Add the dependecies that are in the folder named : 
 "dependencies_for_VideoConverter"
-to enable to use "SpringBoot"
+to enable to use "SpringBoot".
+If it is asked, defined them as "Jar directories".
 
 
 In order to run the project, 

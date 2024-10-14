@@ -3,9 +3,10 @@
 This project is for now just a group of page that enable to register in database 
 some youtube video links with the title of the video associated with it.
 
-# Future implementation
+# Future implementations
 
 One of the future go would be to broadcast youtube videos from the back-end, to the computer receiving. The goal would be to play videos just like spotify but by broadcasting youtube content.
+Each user could connect and have their own playlists of musics or podcasts playing in the background.
 
 # How to start the project :
 
